@@ -18,6 +18,11 @@ Ricochet means we can no longer export from in-game, Parasyte is now required th
 * Microsoft Visual Studio 2017 Runtime ([x86](https://aka.ms/vs/16/release/vc_redist.x86.exe) and [x64](https://aka.ms/vs/16/release/vc_redist.x64.exe))
 * Official copies of the games (only the latest copies from official distributors are tested)
 
+## Current plans
+* Possible implementation of ripping Infinity Ward (IW3/IW4/IW5/IW6/IW7) and Sledgehammer-based (S1, S2, H1, H2) FXs using the implementation of ZoneTool
+* Build Mecha inside of Greyhound, for easier sound ripping...
+* Figure out Parasyte source code to get COD: Online support working, for models + anim ripping (using Momo5502's IFS ripping tools to rip the Models + Anims)
+
 The following tools/plugins are required/recommended for some assets/games:
 
 * [SETools](https://github.com/dtzxporter/SETools) by DTZxPorter (.seanim & .semodel) (Autodesk Maya)
