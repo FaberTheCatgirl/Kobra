@@ -495,7 +495,7 @@
     <Image Include="..\..\WraithX\Resources\CheckMarkIcon.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\Resources\GreyhoundPride.ico">
+    <Image Include="..\Resources\GreyhoundVenom.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

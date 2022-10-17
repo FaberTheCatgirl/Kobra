@@ -336,3 +336,7 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+src/External/Opus
+src/External/DirectXTex
+src/External/DirectXShaderCompiler
+src/External/DirectXShaderCompiler
