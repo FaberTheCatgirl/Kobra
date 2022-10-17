@@ -42,7 +42,7 @@
     <LibraryPath>..\..\External\CascLib\bin\CascLib\x64\DebugUD;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <TargetName>Greyhound</TargetName>
+    <TargetName>GreyhoundFX</TargetName>
     <LibraryPath>..\..\External\CascLib\bin\CascLib\x64\ReleaseUD;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

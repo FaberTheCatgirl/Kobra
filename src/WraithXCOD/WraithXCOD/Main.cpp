@@ -150,13 +150,13 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     WraithTheme::OnLoadImageResource = LoadImageResource;
 
     // Start the instance (We must provide the main window title, never include versions from now on)
-    // auto CanContinue = Instance::BeginSingleInstance("Greyhound");
+    // auto CanContinue = Instance::BeginSingleInstance("GreyhoundFX");
 
     // Only resume if we can
     // if (CanContinue)
     {
         // Load settings, specify default
-        SettingsManager::LoadSettings("greyhound",
+        SettingsManager::LoadSettings("greyhoundfx",
         {
             { "exportimg", "PNG" },
             { "exportsnd", "WAV" },
@@ -169,21 +169,21 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
             { "exportmodelimg", "true" },
             { "exportalllods", "false" },
             { "exporthitbox", "false" },
-            { "exportvtxcolor", "false" },
-            { "exportimgnames", "false"},
+            { "exportvtxcolor", "true" },
+            { "exportimgnames", "true"},
             { "mdlmtlfolders", "false"},
             { "skipprevmodel", "true"},
             { "skipprevimg", "true"},
             { "skipprevsound", "true"},
             { "skipprevanim", "true"},
-            { "export_ma", "true" },
+            { "export_ma", "false" },
             { "export_obj", "false" },
             { "export_xna", "false" },
             { "export_smd", "false" },
             { "export_xmexport", "false" },
             { "export_xmbin", "false" },
             { "export_seanim", "true" },
-            { "export_semodel", "false" },
+            { "export_semodel", "true" },
             { "export_castanim", "false" },
             { "export_castmdl", "false" },
             { "export_fbx", "false" },
@@ -191,8 +191,8 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
             { "export_directxanim", "false" },
             { "directxanim_ver", "17" },
             { "global_images", "true" },
-            { "patchnormals", "true" },
-            { "patchcolor", "true" },
+            { "patchnormals", "false" },
+            { "patchcolor", "false" },
             { "showxanim", "true" },
             { "showxmodel", "true" },
             { "showximage", "false" },
@@ -200,7 +200,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
             { "showxrawfiles", "false" },
             { "showxsounds", "false" },
             { "showxmtl", "false" },
-            { "exportgdt_bo3", "true" },
+            { "exportgdt_bo3", "false" },
             { "exportgdt_waw", "false" },
             { "cleargdt_exit", "true" },
             { "overwrite_gdt", "true" },
@@ -224,13 +224,13 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         // Clean up files
         CleanupFilesystem();
         // Check for updates
-        WraithUpdate::CheckForUpdates("Scobalula, Venom Modding", "Greyhound", "Greyhound", "greyhound.exe");
+        WraithUpdate::CheckForUpdates("Scobalula, Venom Modding", "GreyhoundFX", "GreyhoundFX", "greyhoundfxs.exe");
 
         // Initialize the API (This must be done BEFORE running a WraithApp)
         if (!WraithX::InitializeAPI(true))
         {
             // Failed to initialize
-            MessageBoxA(NULL, "A fatal error occured while initializing Greyhound. Maybe contact developer???", "Greyhound", MB_OK | MB_ICONEXCLAMATION);
+            MessageBoxA(NULL, "A fatal error occured while initializing GreyhoundFX. Maybe contact developer???", "Greyhound", MB_OK | MB_ICONEXCLAMATION);
             // Failed
             return -1;
         }
