@@ -27,6 +27,7 @@
 // We need the CoDTranslators
 #include "CoDXAnimTranslator.h"
 #include "CoDXModelTranslator.h"
+#include "CoDEffectTranslator.h"
 #include "CoDRawfileTranslator.h"
 #include "CoDXConverter.h"
 
@@ -990,6 +991,8 @@ ExportGameResult CoDAssets::ExportAsset(const CoDAsset_t* Asset)
     case WraithAssetType::Image: Result = ExportImageAsset((CoDImage_t*)Asset, ExportPath, ImageExtension); break;
     // Export a sound
     case WraithAssetType::Sound: Result = ExportSoundAsset((CoDSound_t*)Asset, ExportPath, CoDAssets::GameID == SupportedGames::WorldAtWar ? ".wav" : SoundExtension); break;
+    // Export a effect
+    case WraithAssetType::Effect: Result = ExportEffectAsset((CoDEffect_t*)Asset, ExportPath); break;
     // Export a rawfile
     case WraithAssetType::RawFile: Result = ExportRawfileAsset((CoDRawFile_t*)Asset, ExportPath); break;
     // Export a material
@@ -1374,6 +1377,10 @@ std::string CoDAssets::BuildExportPath(const CoDAsset_t* Asset)
             // Merge it
             ApplicationPath = FileSystems::CombinePath(ApplicationPath, ((CoDSound_t*)Asset)->FullPath);
         }
+        break;
+    case WraithAssetType::Effect:
+        // Default directory
+        ApplicationPath = FileSystems::CombinePath(ApplicationPath, "fx");
         break;
     case WraithAssetType::RawFile:
         // Default directory
@@ -1968,6 +1975,23 @@ ExportGameResult CoDAssets::ExportSoundAsset(const CoDSound_t* Sound, const std:
                 Sound::ConvertSoundMemory(SoundData->DataBuffer, SoundData->DataSize, InFormat, FullSoundPath, SoundFormatType);
             }
         }
+    }
+
+    // Success, unless specific error
+    return ExportGameResult::Success;
+}
+
+ExportGameResult CoDAssets::ExportEffectAsset(const CoDEffect_t* Effect, const std::string& ExportPath)
+{
+    // Read from specific handler (By game)
+    switch (CoDAssets::GameID)
+    {
+    case SupportedGames::BlackOps:
+    case SupportedGames::BlackOps2:
+    case SupportedGames::BlackOps3:
+        // Send to generic translator
+        CoDEffectTranslator::TranslateEffect(Effect, ExportPath);
+        break;
     }
 
     // Success, unless specific error

@@ -14,6 +14,7 @@ BEGIN_MESSAGE_MAP(GeneralSettings, WraithWindow)
     ON_COMMAND(IDC_SHOWXMODEL, OnXModels)
     ON_COMMAND(IDC_SHOWXANIM, OnXAnims)
     ON_COMMAND(IDC_SHOWXIMAGE, OnXImages)
+    ON_COMMAND(IDC_SHOWEFFECTS, OnXEffects)
     ON_COMMAND(IDC_SHOWXRAW, OnXRawFiles)
     ON_COMMAND(IDC_SHOWXSOUNDS, OnXSounds)
     ON_COMMAND(IDC_SHOWXMTL, OnXMTL)
@@ -49,6 +50,7 @@ void GeneralSettings::OnBeforeLoad()
     ((CButton*)GetDlgItem(IDC_SHOWXMODEL))->SetCheck(SettingsManager::GetSetting("showxmodel", "true") == "true");
     ((CButton*)GetDlgItem(IDC_SHOWXANIM))->SetCheck(SettingsManager::GetSetting("showxanim", "true") == "true");
     ((CButton*)GetDlgItem(IDC_SHOWXIMAGE))->SetCheck(SettingsManager::GetSetting("showximage", "false") == "true");
+    ((CButton*)GetDlgItem(IDC_SHOWEFFECTS))->SetCheck(SettingsManager::GetSetting("showefx", "false") == "true");
     ((CButton*)GetDlgItem(IDC_SHOWXRAW))->SetCheck(SettingsManager::GetSetting("showxrawfiles", "false") == "true");
     ((CButton*)GetDlgItem(IDC_SHOWXSOUNDS))->SetCheck(SettingsManager::GetSetting("showxsounds", "false") == "true");
     ((CButton*)GetDlgItem(IDC_SHOWXMTL))->SetCheck(SettingsManager::GetSetting("showxmtl", "false") == "true");
@@ -90,6 +92,14 @@ void GeneralSettings::OnXImages()
     bool CheckboxChecked = ((((CButton*)GetDlgItem(IDC_SHOWXIMAGE))->GetState() & BST_CHECKED) == BST_CHECKED);
     // Set it
     SettingsManager::SetSetting("showximage", (CheckboxChecked) ? "true" : "false");
+}
+
+void GeneralSettings::OnXEffects()
+{
+    // Whether or not we are checked
+    bool CheckboxChecked = ((((CButton*)GetDlgItem(IDC_SHOWEFFECTS))->GetState() & BST_CHECKED) == BST_CHECKED);
+    // Set it
+    SettingsManager::SetSetting("showefx", (CheckboxChecked) ? "true" : "false");
 }
 
 void GeneralSettings::OnXRawFiles()

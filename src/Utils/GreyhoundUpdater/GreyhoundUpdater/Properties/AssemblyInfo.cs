@@ -8,11 +8,11 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("GreyhoundUpdater")]
-[assembly: AssemblyDescription("Updater for Greyhound")]
+[assembly: AssemblyDescription("Updater for GreyhoundFX")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Philip / Scobalula")]
+[assembly: AssemblyCompany("Scobalula, Venom Modding")]
 [assembly: AssemblyProduct("GreyhoundUpdater")]
-[assembly: AssemblyCopyright("Copyright © Philip / Scobalula 2018")]
+[assembly: AssemblyCopyright("Copyright © Scobalula 2018, Venom Modding 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

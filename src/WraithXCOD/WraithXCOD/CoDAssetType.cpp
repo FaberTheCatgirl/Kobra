@@ -415,6 +415,21 @@ bool CoDRawFile_t::Compare(const CoDAsset_t* candidate, const AssetCompareMethod
     return false;
 }
 
+CoDEffect_t::CoDEffect_t()
+{
+    // Defaults
+    ElementCount = 0;
+    // Set type
+    AssetType = WraithAssetType::Effect;
+    // Size
+    AssetSize = -1;
+}
+
+CoDEffect_t::~CoDEffect_t()
+{
+    // Defaults
+}
+
 XAnim_t::XAnim_t()
 {
     // Defaults

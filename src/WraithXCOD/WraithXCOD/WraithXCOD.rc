@@ -90,9 +90,10 @@ BEGIN
     CONTROL         "Load 'XModels' from the game",IDC_SHOWXMODEL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,32,127,11
     CONTROL         "Load 'XAnims' from the game",IDC_SHOWXANIM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,48,127,11
     CONTROL         "Load 'XImages' from the game",IDC_SHOWXIMAGE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,64,127,11
-    CONTROL         "Load 'Raw Files' from the game",IDC_SHOWXRAW,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,80,127,11
-    CONTROL         "Load 'Sounds' from the game",IDC_SHOWXSOUNDS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,96,127,11
-    CONTROL         "Load 'Materials' from the game",IDC_SHOWXMTL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,112,127,11
+    CONTROL         "Load 'XEffects' from the game (Re-added),",IDC_SHOWEFFECTS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,80,127,11
+    CONTROL         "Load 'Raw Files' from the game",IDC_SHOWXRAW,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,96,127,11
+    CONTROL         "Load 'Sounds' from the game",IDC_SHOWXSOUNDS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,112,127,11
+    CONTROL         "Load 'Materials' from the game",IDC_SHOWXMTL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,128,127,11
     LTEXT           "Tip: When you change one of these, click 'Load Game' again to see changes",IDC_TIP,17,168,312,8
     LTEXT           "Notice: Not all asset types are supported by every game",IDC_NOTICE,17,180,312,8
     COMBOBOX        IDC_ASSET_SORT_METHOD,73,151,111,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP

@@ -108,7 +108,7 @@ static void CleanupFilesystem()
 
 LONG WINAPI MyUnhandledExceptionFilter(EXCEPTION_POINTERS* ExceptionInfo)
 {
-    MessageBoxA(NULL, "Greyhound has encountered a fatal error and must close.\n\nA dump file will be written to where Greyhound's exe is located, please provide this and as much information as you can when reporting this crash.", "Greyhound", MB_OK | MB_ICONERROR);
+    MessageBoxA(NULL, "GreyhoundFX has encountered a fatal error and must close.\n\nA dump file will be written to where GreyhoundFX's exe is located, please provide this and as much information as you can when reporting this crash.", "GreyhoundFX", MB_OK | MB_ICONERROR);
     
     HANDLE hFile = CreateFile(
         L"crash_dump.dmp",
@@ -224,13 +224,13 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         // Clean up files
         CleanupFilesystem();
         // Check for updates
-        WraithUpdate::CheckForUpdates("Scobalula", "Greyhound", "Greyhound", "greyhound.exe");
+        WraithUpdate::CheckForUpdates("Scobalula, Venom Modding", "Greyhound", "Greyhound", "greyhound.exe");
 
         // Initialize the API (This must be done BEFORE running a WraithApp)
         if (!WraithX::InitializeAPI(true))
         {
             // Failed to initialize
-            MessageBoxA(NULL, "A fatal error occured while initializing Greyhound", "Greyhound", MB_OK | MB_ICONEXCLAMATION);
+            MessageBoxA(NULL, "A fatal error occured while initializing Greyhound. Maybe contact developer???", "Greyhound", MB_OK | MB_ICONEXCLAMATION);
             // Failed
             return -1;
         }

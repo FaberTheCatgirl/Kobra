@@ -195,6 +195,23 @@ public:
     bool Compare(const CoDAsset_t* candidate, const AssetCompareMethod compareMethod) const;
 };
 
+// A class that represents an effect asset
+class CoDEffect_t : public CoDAsset_t
+{
+public:
+    CoDEffect_t();
+    virtual ~CoDEffect_t();
+
+    // -- Image properties
+
+    // The file path
+    std::string FXFilePath;
+    // Total element count
+    uint32_t ElementCount;
+
+    bool Compare(const CoDEffect_t* candidate, const AssetCompareMethod compareMethod) const;
+};
+
 // -- Generic structures for translating similar game formats
 
 // Types of bone data
