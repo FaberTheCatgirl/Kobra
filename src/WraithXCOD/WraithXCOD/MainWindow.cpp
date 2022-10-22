@@ -629,7 +629,7 @@ void MainWindow::LoadGameAsync()
         GetDlgItem(IDC_SEARCHTEXT)->EnableWindow(false);
 
         // Notify the user about the issue
-        MessageBoxA(this->GetSafeHwnd(), "No instances of any supported game were found, or your game is running as Administrator. Please make sure the game is running first or running as Administrator.", "GreyhoundFX", MB_OK | MB_ICONWARNING);
+        MessageBoxA(this->GetSafeHwnd(), "No instances of any supported game were found, or your game is running as Administrator. Please make sure the game is running first or run GreyhoundFX as Administrator.", "GreyhoundFX - Game Unsupported or Running as Admin", MB_OK | MB_ICONWARNING);
     }
     else if (LoadGameResult == FindGameResult::FailedToLocateInfo)
     {

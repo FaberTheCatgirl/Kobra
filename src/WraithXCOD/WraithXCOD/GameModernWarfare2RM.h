@@ -43,6 +43,8 @@ private:
 
     // A list of offsets for Modern Warfare 2 R2M single player
     static std::array<DBGameInfo, 1> SinglePlayerOffsets;
+    // A list of offsets for Modern Warfare 2 R2M single player
+    static std::array<DBGameInfo, 1> SinglePlayerClientOffsets;
     // A list of offsets for Modern Warfare 2 R2M multi player
     static std::array<DBGameInfo, 1> MultiPlayerOffsets;
 

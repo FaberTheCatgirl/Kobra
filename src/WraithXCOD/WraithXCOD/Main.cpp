@@ -230,7 +230,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         if (!WraithX::InitializeAPI(true))
         {
             // Failed to initialize
-            MessageBoxA(NULL, "A fatal error occured while initializing GreyhoundFX. Maybe contact developer???", "Greyhound", MB_OK | MB_ICONEXCLAMATION);
+            MessageBoxA(NULL, "A fatal error occured while initializing GreyhoundFX. Maybe contact developer???", "GreyhoundFX", MB_OK | MB_ICONEXCLAMATION);
             // Failed
             return -1;
         }

@@ -419,13 +419,19 @@ const std::vector<CoDGameProcess> CoDAssets::GameProcessInfo =
 {
     // World at War
     { "codwaw.exe", SupportedGames::WorldAtWar, SupportedGameFlags::SP },
+    { "t4sp.exe", SupportedGames::WorldAtWar, SupportedGameFlags::SP },
     { "codwawmp.exe", SupportedGames::WorldAtWar, SupportedGameFlags::MP },
+    { "t4mp.exe", SupportedGames::WorldAtWar, SupportedGameFlags::MP },
     // Black Ops
     { "blackops.exe", SupportedGames::BlackOps, SupportedGameFlags::SP },
+    { "t5sp.exe", SupportedGames::BlackOps, SupportedGameFlags::SP },
     { "blackopsmp.exe", SupportedGames::BlackOps, SupportedGameFlags::MP },
+    { "t5mp.exe", SupportedGames::BlackOps, SupportedGameFlags::MP },
     // Black Ops 2
     { "t6zm.exe", SupportedGames::BlackOps2, SupportedGameFlags::ZM },
+    { "t6zmv41.exe", SupportedGames::BlackOps2, SupportedGameFlags::ZM },
     { "t6mp.exe", SupportedGames::BlackOps2, SupportedGameFlags::MP },
+    { "t6mpv43.exe", SupportedGames::BlackOps2, SupportedGameFlags::MP },
     { "t6sp.exe", SupportedGames::BlackOps2, SupportedGameFlags::SP },
     // Black Ops 3
     { "blackops3.exe", SupportedGames::BlackOps3, SupportedGameFlags::SP },
@@ -439,6 +445,7 @@ const std::vector<CoDGameProcess> CoDAssets::GameProcessInfo =
     // Modern Warfare 2
     { "iw4sp.exe", SupportedGames::ModernWarfare2, SupportedGameFlags::SP },
     { "iw4mp.exe", SupportedGames::ModernWarfare2, SupportedGameFlags::MP },
+    { "iw4x.exe",  SupportedGames::ModernWarfare2, SupportedGameFlags::MP },
     // Modern Warfare 3
     { "iw5sp.exe", SupportedGames::ModernWarfare3, SupportedGameFlags::SP },
     { "iw5mp.exe", SupportedGames::ModernWarfare3, SupportedGameFlags::MP },
@@ -460,6 +467,7 @@ const std::vector<CoDGameProcess> CoDAssets::GameProcessInfo =
     { "Parasyte.CLI.exe", SupportedGames::Parasyte, SupportedGameFlags::SP },
     // Modern Warfare 2 Remastered
     { "mw2cr.exe", SupportedGames::ModernWarfare2Remastered, SupportedGameFlags::SP },
+    { "h2-mod.exe", SupportedGames::ModernWarfare2Remastered, SupportedGameFlags::SP },
     // 007 Quantum Solace
     { "jb_liveengine_s.exe", SupportedGames::QuantumSolace, SupportedGameFlags::SP },
 };

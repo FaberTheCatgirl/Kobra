@@ -20,6 +20,11 @@ std::array<DBGameInfo, 1> GameModernWarfare2RM::SinglePlayerOffsets =
 {{
     { 0xBF2620, 0xBF1E40, 0xB157800, 0x425DA80 }
 }};
+// Modern Warfare 2 RM SP - Custom Client
+std::array<DBGameInfo, 1> GameModernWarfare2RM::SinglePlayerClientOffsets =
+{ {
+    { 0xBF2620, 0xBF1E40, 0xB157800, 0x425DA80 }
+} };
 // Modern Warfare 2 RM MP
 std::array<DBGameInfo, 1> GameModernWarfare2RM::MultiPlayerOffsets =
 {{
@@ -126,7 +131,7 @@ bool GameModernWarfare2RM::LoadOffsets()
         auto BaseAddress = CoDAssets::GameInstance->GetMainModuleAddress();
 
         // Check built-in offsets via game exe mode (SP/MP)
-        for (auto& GameOffsets : (CoDAssets::GameFlags == SupportedGameFlags::SP) ? SinglePlayerOffsets : MultiPlayerOffsets)
+        for (auto& GameOffsets : (CoDAssets::GameFlags == SupportedGameFlags::SP) ? SinglePlayerOffsets : SinglePlayerClientOffsets)
         {
             // Read required offsets (XANIM, XMODEL, XIMAGE)
             CoDAssets::GameOffsetInfos.emplace_back(CoDAssets::GameInstance->Read<uint64_t>(BaseAddress + GameOffsets.DBAssetPools + (8 * 5)));

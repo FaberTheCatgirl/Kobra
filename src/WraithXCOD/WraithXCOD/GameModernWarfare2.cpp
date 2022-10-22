@@ -25,6 +25,11 @@ std::array<DBGameInfo, 1> GameModernWarfare2::MultiPlayerOffsets =
     { 0x6F81D0, 0x6F7F08, 0x6F9F00, 0 }
 }};
 
+// Modern Warfare 2 MP - IW4x
+std::array<DBGameInfo, 1> GameModernWarfare2::MultiPlayerClientOffsets =
+{ {
+    { 0x6F81D0, 0x6F7F08, 0x6F9F00, 0 }
+} };
 // -- Finished with databases
 
 bool GameModernWarfare2::LoadOffsets()
