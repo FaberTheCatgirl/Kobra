@@ -847,8 +847,6 @@ void MainWindow::FinishProgress(CWnd* Owner)
 
 void MainWindow::OnDestroy()
 {
-    // This is where we finalize GDT info (The main window will only close once)
-    CoDAssets::GameGDTProcessor->ExportGameGDTs();
 }
 
 void MainWindow::OnSupport()

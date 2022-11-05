@@ -138,7 +138,6 @@
     <ClCompile Include="GameVanguard.cpp" />
     <ClCompile Include="GameWorldAtWar.cpp" />
     <ClCompile Include="GameWorldWar2.cpp" />
-    <ClCompile Include="GDTSettings.cpp" />
     <ClCompile Include="GeneralSettings.cpp" />
     <ClCompile Include="ImageSettings.cpp" />
     <ClCompile Include="IPAKCache.cpp" />
@@ -215,7 +214,6 @@
     <ClInclude Include="GameVanguard.h" />
     <ClInclude Include="GameWorldAtWar.h" />
     <ClInclude Include="GameWorldWar2.h" />
-    <ClInclude Include="GDTSettings.h" />
     <ClInclude Include="GeneralSettings.h" />
     <ClInclude Include="ImageSettings.h" />
     <ClInclude Include="IPAKCache.h" />

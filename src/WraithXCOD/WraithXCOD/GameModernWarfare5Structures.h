@@ -78,15 +78,15 @@ struct MW5XModelSurface
     uint16_t StatusFlag;
     uint16_t VertexCount;
     uint16_t FacesCount;
+    uint16_t Padding5;
     uint16_t Padding6;
     uint16_t Padding7;
-    uint16_t Padding8;
     uint8_t VertListCount;
     uint8_t Padding0[19];
     uint16_t WeightCounts[8];
-    uint8_t Padding1[4];
+    uint8_t Padding1[8];
     float NewScale;
-    uint32_t Offsets[12];
+    uint32_t Offsets[13];
     uint64_t MeshBufferPointer;
     uint64_t RigidWeightsPtr;
     uint8_t Padding4[40];
@@ -96,14 +96,13 @@ struct MW5XModelSurface
     float Scale;
     float Min;
     float Max;
-    uint8_t Padding9[24];
+    uint8_t Padding9[16];
 };
 #pragma pack(pop)
 
 struct MW5GfxImage
 {
     uint64_t Hash;
-    uint64_t NamePtr;
     uint8_t Unk00[16];
     uint32_t BufferSize;
     uint32_t Unk02;
@@ -172,6 +171,22 @@ struct MW5XAnimNotetrack
 #pragma pack(pop)
 
 #pragma pack(push, 1)
+struct MW5XAnimDataInfo
+{
+    int32_t DataByteOffset;
+    int32_t DataShortOffset;
+    int32_t DataIntOffset;
+    int32_t Padding4;
+    uint64_t OffsetPtr;
+    uint64_t OffsetPtr2;
+    uint32_t StreamIndex;
+    uint32_t OffsetCount;
+    uint8_t Padding5[24];
+    uint64_t StreamInfoPtr;
+};
+#pragma pack(pop)
+
+#pragma pack(push, 1)
 struct MW5XAnim
 {
     uint64_t Hash;
@@ -211,16 +226,7 @@ struct MW5XAnim
 
     uint8_t Padding3[20];
 
-    uint32_t DataByteOffset;
-    uint32_t DataShortOffset;
-    uint32_t DataIntOffset;
-    uint32_t Padding4;
-    uint64_t OffsetPtr;
-    uint64_t OffsetPtr2;
-    uint32_t StreamIndex;
-    uint32_t OffsetCount;
-    uint8_t Padding5[24];
-    uint64_t StreamInfoPtr;
+    MW5XAnimDataInfo DataInfo;
 };
 #pragma pack(pop)
 
@@ -235,6 +241,19 @@ struct MW5XAnimDeltaParts
 
 #pragma pack(push, 1)
 struct MW5XMaterial
+{
+    uint64_t Hash;
+    uint8_t Padding[16];
+    uint8_t ImageCount;
+    uint8_t Padding2[15];
+    uint64_t TechsetPtr;
+    uint64_t ImageTablePtr;
+    uint8_t Padding3[32];
+};
+#pragma pack(pop)
+
+#pragma pack(push, 1)
+struct MW5XMaterialSP
 {
     uint64_t Hash;
     uint64_t NamePtr;
@@ -271,3 +290,27 @@ struct MW5SoundBank
 #pragma pack(pop)
 
 extern uint32_t MW5DXGIFormats[52];
+
+#pragma pack(push, 1)
+struct MW5SndAsset
+{
+    uint64_t Name;
+    uint64_t Unk;
+    uint64_t StreamKeyEx;
+    uint64_t StreamKey;
+    uint32_t Size;
+    uint32_t Unk3;
+    uint64_t Unk4;
+    uint64_t Unk5;
+    uint32_t SeekTableSize;
+    uint32_t LoadedSize;
+    uint32_t FrameCount;
+    uint32_t FrameRate;
+    uint32_t Unk9;
+    uint8_t Unk10;
+    uint8_t Unk11;
+    uint8_t Unk12;
+    uint8_t ChannelCount;
+    uint64_t Unk13;
+};
+#pragma pack(pop)

@@ -79,7 +79,6 @@ BEGIN
     LTEXT           "Anim Settings",IDC_ANIMPANEL,0,58,117,29,SS_NOTIFY
     LTEXT           "Image Settings",IDC_IMAGEPANEL,0,87,117,29,SS_NOTIFY
     LTEXT           "Sound Settings",IDC_SOUNDPANEL,0,116,117,29,SS_NOTIFY
-    LTEXT           "GDT Settings",IDC_GDTPANEL,0,145,117,29,SS_NOTIFY
 END
 
 IDD_GENERALSETTINGS DIALOGEX 0, 0, 350, 200
@@ -303,13 +302,6 @@ BEGIN
         BOTTOMMARGIN, 169
     END
 
-    IDD_GDTSETTINGS, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 223
-    END
-
     IDD_PROGRESSDIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
@@ -373,8 +365,8 @@ IDI_CHECKMARK           ICON                    "..\\..\\WraithX\\Resources\\Che
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,23,18,0
- PRODUCTVERSION 1,23,18,0
+ FILEVERSION 1,23,27,0
+ PRODUCTVERSION 1,23,27,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -390,13 +382,13 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "CompanyName", "DTZxPorter / Scobalula / Venom Modding"
-            VALUE "FileDescription", "GreyhoundFX"
-            VALUE "FileVersion", "1.23.18.0"
-            VALUE "InternalName", "GreyhoundFX"
+            VALUE "FileDescription", "Kobra"
+            VALUE "FileVersion", "1.23.27.0"
+            VALUE "InternalName", "Kobra"
             VALUE "LegalCopyright", "Copyright (C) 2022 DTZxPorter / Scobalula / Venom Modding"
-            VALUE "OriginalFilename", "GreyhoundFX.exe"
-            VALUE "ProductName", "GreyhoundFX"
-            VALUE "ProductVersion", "1.23.18.0"
+            VALUE "OriginalFilename", "Kobra.exe"
+            VALUE "ProductName", "Kobra"
+            VALUE "ProductVersion", "1.23.27.0"
         END
     END
     BLOCK "VarFileInfo"
