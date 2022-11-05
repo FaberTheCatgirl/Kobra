@@ -127,7 +127,7 @@ void GLTF::ExportGLTF(const WraithModel& Model, const std::string& FileName, boo
 	Scene.nodes.push_back(0);
 
 	// Assign asset
-	GltfModel.asset.generator = "GreyhoundFX";
+	GltfModel.asset.generator = "Kobra";
 	GltfModel.asset.version = "2.0";
 	GltfModel.defaultScene = 0;
 

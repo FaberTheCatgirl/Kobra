@@ -9,7 +9,7 @@
 #include "Compression.h"
 #include "MemoryReader.h"
 
-// TODO: Heavy Improvements are required, this was implemented in less than a day for specific use in GreyhoundFX with Call of Duty
+// TODO: Heavy Improvements are required, this was implemented in less than a day for specific use in Kobra with Call of Duty
 // so I'd advise against using this unless you know exactly what you're doing
 
 void Casc::Container::LoadIndexFiles()

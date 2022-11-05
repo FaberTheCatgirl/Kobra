@@ -108,7 +108,7 @@ static void CleanupFilesystem()
 
 LONG WINAPI MyUnhandledExceptionFilter(EXCEPTION_POINTERS* ExceptionInfo)
 {
-    MessageBoxA(NULL, "GreyhoundFX has encountered a fatal error and must close.\n\nA dump file will be written to where GreyhoundFX's exe is located, please provide this and as much information as you can when reporting this crash.", "GreyhoundFX", MB_OK | MB_ICONERROR);
+    MessageBoxA(NULL, "Kobra has encountered a fatal error and must close.\n\nA dump file will be written to where Kobra's exe is located, please provide this and as much information as you can when reporting this crash.", "Kobra", MB_OK | MB_ICONERROR);
     
     HANDLE hFile = CreateFile(
         L"crash_dump.dmp",
@@ -150,13 +150,13 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     WraithTheme::OnLoadImageResource = LoadImageResource;
 
     // Start the instance (We must provide the main window title, never include versions from now on)
-    // auto CanContinue = Instance::BeginSingleInstance("GreyhoundFX");
+    // auto CanContinue = Instance::BeginSingleInstance("Kobra");
 
     // Only resume if we can
     // if (CanContinue)
     {
         // Load settings, specify default
-        SettingsManager::LoadSettings("greyhoundfx",
+        SettingsManager::LoadSettings("kobra",
         {
             { "exportimg", "PNG" },
             { "exportsnd", "WAV" },
@@ -224,13 +224,13 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         // Clean up files
         CleanupFilesystem();
         // Check for updates
-        WraithUpdate::CheckForUpdates("Scobalula, Venom Modding", "GreyhoundFX", "GreyhoundFX", "greyhoundfxs.exe");
+        WraithUpdate::CheckForUpdates("Scobalula, Venom Modding", "Kobra", "Kobra", "Kobras.exe");
 
         // Initialize the API (This must be done BEFORE running a WraithApp)
         if (!WraithX::InitializeAPI(true))
         {
             // Failed to initialize
-            MessageBoxA(NULL, "A fatal error occured while initializing GreyhoundFX. Maybe contact developer???", "GreyhoundFX", MB_OK | MB_ICONEXCLAMATION);
+            MessageBoxA(NULL, "A fatal error occured while initializing Kobra. Maybe contact developer???", "Kobra", MB_OK | MB_ICONEXCLAMATION);
             // Failed
             return -1;
         }
