@@ -1,6 +1,6 @@
 [![Releases](https://img.shields.io/github/downloads/Scobalula/Greyhound/total.svg)](https://github.com/VenomModding/GreyhoundFX/releases) [![License](https://img.shields.io/github/license/Scobalula/Greyhound.svg)](https://github.com/VenomModding/GreyhoundFX/blob/master/LICENSE) [![Discord](https://img.shields.io/badge/chat-Discord-blue.svg)](https://t.co/6IyEfOn62i)
 
-GreyhoundFX is a fork of Greyhound, an asset extractor various titles running on the IW Engine (primarily Call of Duty games), and is based off the famous [Wraith Archon](https://github.com/dtzxporter/WraithXArchon/) that was originally developed by DTZxPorter. Greyhound's aim is to provide people access to assets from the games for various purposes including working mods such custom zombie maps or weapon mods, 3D Art, and thumbnails for content creation. GreyhoundFX adds XEffect support, due to it being cut from Greyhound because "barely any users used it".
+Kobra (formerly GreyhoundFX) is a fork of Greyhound, an asset extractor various titles running on the IW Engine (primarily Call of Duty games), and is based off the famous [Wraith Archon](https://github.com/dtzxporter/WraithXArchon/) that was originally developed by DTZxPorter. Greyhound's aim is to provide people access to assets from the games for various purposes including working mods such custom zombie maps or weapon mods, 3D Art, and thumbnails for content creation. Kobra adds XEffect and GDT support, due to it being cut from Greyhound because "barely any users used it".
 
 For detailed information such as game support, settings, FAQs, etc. please refer to the original Greyhound's wiki: [Wiki](https://scobalula.github.io/Greyhound/) Work is being done to populate the wiki with information and tutorials so stay tuned!
 
@@ -34,7 +34,7 @@ The following tools/plugins are required/recommended for some assets/games:
 
 ## Links:
 * Discord Server: [https://t.co/6IyEfOn62i](https://t.co/6IyEfOn62i)
-* This Github Repo: [https://github.com/VenomModding/GreyhoundFX](https://github.com/VenomModding/GreyhoundFX)
+* This Github Repo: [https://github.com/VenomModding/Kobra](https://github.com/VenomModding/Kobra)
 * Original Github Repo: [https://github.com/Scobalula/Greyhound](https://github.com/Scobalula/Greyhound)
 * Change Log: [https://github.com/Scobalula/Greyhound/blob/master/CHANGELOG.md](https://github.com/Scobalula/Greyhound/blob/master/CHANGELOG.md)
 * Latest Release: [https://github.com/VenomModding/GreyhoundFX/releases](https://github.com/VenomModding/GreyhoundFX/releases)
@@ -49,7 +49,7 @@ Greyhound is distributed with an automatic updater that will check for updates e
 
 ## Credits/Contributors
 
-* JustVenom - Re-adding FX support
+* JustVenom - Re-adding FX and GDT support
 * Scobalula - Developer/Maintainer/Research
 * Blakintosh - MWR Material Support
 * Eric Maynard - Help on BOCW from ModelGetter, ZM Hashes for BOCW Base
