@@ -20,12 +20,21 @@ std::array<DBGameInfo, 1> GameModernWarfareRM::SinglePlayerOffsets =
 {{
     { 0xEC9FB0, 0xEC97D0, 0xB8D0A80, 0x46E7300 }
 }};
+// Modern Warfare RM SP - Custom Client
+std::array<DBGameInfo, 1> GameModernWarfareRM::SinglePlayerClientOffsets =
+{ {
+    { 0xEC9FB0, 0xEC97D0, 0xB8D0A80, 0x46E7300 }
+} };
 // Modern Warfare RM MP
 std::array<DBGameInfo, 1> GameModernWarfareRM::MultiPlayerOffsets =
 {{
     { 0x10B4460, 0x10B3C80, 0xAC87D80, 0x60E2D80 }
 }};
-
+// Modern Warfare RM MP - Custom Client
+std::array<DBGameInfo, 1> GameModernWarfareRM::MultiPlayerClientOffsets =
+{ {
+    { 0x10B4460, 0x10B3C80, 0xAC87D80, 0x60E2D80 }
+} };
 // -- Finished with databases
 
 // -- Structures for reading

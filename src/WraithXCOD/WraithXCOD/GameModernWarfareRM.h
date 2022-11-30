@@ -46,8 +46,12 @@ private:
 
     // A list of offsets for Modern Warfare RM single player
     static std::array<DBGameInfo, 1> SinglePlayerOffsets;
+    // A list of offsets for Modern Warfare RM single player
+    static std::array<DBGameInfo, 1> SinglePlayerClientOffsets;
     // A list of offsets for Modern Warfare RM multi player
     static std::array<DBGameInfo, 1> MultiPlayerOffsets;
+    // A list of offsets for Modern Warfare RM multi player
+    static std::array<DBGameInfo, 1> MultiPlayerClientOffsets;
 
     // -- Game utilities
 };
