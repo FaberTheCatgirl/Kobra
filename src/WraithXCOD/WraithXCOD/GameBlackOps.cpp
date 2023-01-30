@@ -119,6 +119,7 @@ bool GameBlackOps::LoadAssets()
     bool NeedsModels = (SettingsManager::GetSetting("showxmodel", "true") == "true");
     bool NeedsFX = (SettingsManager::GetSetting("showefx", "false") == "true");
     bool NeedsRawFiles = (SettingsManager::GetSetting("showxrawfiles", "false") == "true");
+    bool NeedsMaterials = (SettingsManager::GetSetting("showxmtl", "false") == "true");
 
     // Check if we need assets
     if (NeedsAnims)
@@ -254,6 +255,51 @@ bool GameBlackOps::LoadAssets()
 
             // Advance
             ModelOffset += sizeof(BOXModel);
+        }
+    }
+
+    if (NeedsMaterials)
+    {
+        // Materials, skip 8 byte pointer to free head
+        auto MaterialOffset = CoDAssets::GameOffsetInfos[2] + 8;
+        auto MaterialCount = CoDAssets::GamePoolSizes[2];
+
+        // Calculate maximum pool size
+        auto MaximumPoolOffset = (MaterialCount * sizeof(BOXMaterial)) + MaterialOffset;
+        // Store original offset
+        auto MinimumPoolOffset = CoDAssets::GameOffsetInfos[2];
+
+        // Loop and read
+        for (uint32_t i = 0; i < MaterialCount; i++)
+        {
+            // Read
+            auto MaterialResult = CoDAssets::GameInstance->Read<BOXMaterial>(MaterialOffset);
+
+            // Check whether or not to skip, if the handle is 0, or, if the handle is a pointer within the current pool
+            if (MaterialResult.NamePtr == 0 || (MaterialResult.NamePtr > MinimumPoolOffset && MaterialResult.NamePtr < MaximumPoolOffset))
+            {
+                // Advance
+                MaterialOffset += sizeof(BOXMaterial);
+                // Skip this asset
+                continue;
+            }
+
+            // Validate and load if need be
+            auto MaterialName = FileSystems::GetFileName(CoDAssets::GameInstance->ReadNullTerminatedString(MaterialResult.NamePtr));
+
+            // Make and add
+            auto Material = new CoDMaterial_t();
+            // Set
+            Material->AssetName = Strings::Replace(MaterialName, "*", "");
+            Material->AssetPointer = MaterialOffset;
+            Material->ImageCount = (uint8_t)MaterialResult.ImageCount;
+            Material->AssetStatus = WraithAssetStatus::Loaded;
+
+            // Add
+            CoDAssets::GameAssets->LoadedAssets.push_back(Material);
+
+            // Advance
+            MaterialOffset += sizeof(BOXMaterial);
         }
     }
     
