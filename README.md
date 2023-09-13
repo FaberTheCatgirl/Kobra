@@ -1,6 +1,8 @@
-[![Releases](https://img.shields.io/github/downloads/Scobalula/Greyhound/total.svg)](https://github.com/VenomModding/GreyhoundFX/releases) [![License](https://img.shields.io/github/license/Scobalula/Greyhound.svg)](https://github.com/VenomModding/GreyhoundFX/blob/master/LICENSE) [![Discord](https://img.shields.io/badge/chat-Discord-blue.svg)](https://t.co/6IyEfOn62i)
+[![Releases](https://img.shields.io/github/downloads/VenomModding/Kobra/total.svg)](https://github.com/VenomModding/Kobra/releases)
+[![License](https://img.shields.io/github/license/VenomModding/Kobra.svg)](https://github.com/VenomModding/Kobra/blob/master/LICENSE)
+[![Discord](https://img.shields.io/badge/chat-Discord-blue.svg)](https://t.co/6IyEfOn62i)
 
-Kobra (formerly GreyhoundFX) is a fork of Greyhound, an asset extractor various titles running on the IW Engine (primarily Call of Duty games), and is based off the famous [Wraith Archon](https://github.com/dtzxporter/WraithXArchon/) that was originally developed by DTZxPorter. Greyhound's aim is to provide people access to assets from the games for various purposes including working mods such custom zombie maps or weapon mods, 3D Art, and thumbnails for content creation. Kobra adds XEffect and GDT support, due to it being cut from Greyhound because "barely any users used it".
+Kobra is a fork of [Greyhound](https://github.com/Scobalula/Greyhound), an asset extractor for various titles running on the [IW Engine](https://en.wikipedia.org/wiki/IW_(game_engine)) (primarily Call of Duty games), and is based off the famous [Wraith Archon](https://github.com/dtzxporter/WraithXArchon/) that was originally developed by [DTZxPorter](https://github.com/dtzxporter/). Kobra's aim is to provide people access to assets from the games for various purposes including working mods such custom zombie maps or weapon mods, 3D Art, and thumbnails for content creation. Kobra adds XEffect and GDT support, due to it being cut from Greyhound because "barely any users used it".
 
 For detailed information such as game support, settings, FAQs, etc. please refer to the original Greyhound's wiki: [Wiki](https://scobalula.github.io/Greyhound/) Work is being done to populate the wiki with information and tutorials so stay tuned!
 
@@ -8,7 +10,7 @@ For more support you can hop into my Discord: [https://t.co/6IyEfOn62i](https://
 
 ## Ricochet Info
 
-Ricochet means we can no longer export from in-game, Parasyte is now required that works with Greyhound to allow exporting from newer titles:
+Ricochet means we can no longer export from in-game, Parasyte is now required that works with Kobra to allow exporting from newer titles:
 
 [https://wiki.codmods.com/docs/parasyte/index](https://wiki.codmods.com/docs/parasyte/index)
 
@@ -19,9 +21,9 @@ Ricochet means we can no longer export from in-game, Parasyte is now required th
 * Official copies of the games (only the latest copies from official distributors are tested)
 
 ## Current plans
-* Possible implementation of ripping Infinity Ward (IW3/IW4/IW5/IW6/IW7) and Sledgehammer-based (S1, S2, H1, H2) FXs using the implementation of ZoneTool
-* Build Mecha inside of Greyhound, for easier sound ripping...
-* Figure out Parasyte source code to get COD: Online support working, for models + anim ripping (using Momo5502's IFS ripping tools to rip the Models + Anims)
+* Possible implementation of ripping Infinity Ward (IW1/IW2/IW3/IW4/IW5/IW6/IW7) and Sledgehammer-based (S1, S2, H1, H2) FXs using the implementation of [ZoneTool](https://github.com/ZoneTool/zonetool)
+* Build Mecha inside of Kobra, for easier sound ripping...
+* Figure out the Parasyte source code to get COD: Online support working, for models + anim ripping (using [Momo5502](https://github.com/momo5502)'s IFS ripping tools to rip the Models + Anims)
 
 The following tools/plugins are required/recommended for some assets/games:
 
@@ -35,25 +37,26 @@ The following tools/plugins are required/recommended for some assets/games:
 ## Links:
 * Discord Server: [https://t.co/6IyEfOn62i](https://t.co/6IyEfOn62i)
 * This Github Repo: [https://github.com/VenomModding/Kobra](https://github.com/VenomModding/Kobra)
-* Original Github Repo: [https://github.com/Scobalula/Greyhound](https://github.com/Scobalula/Greyhound)
-* Change Log: [https://github.com/Scobalula/Greyhound/blob/master/CHANGELOG.md](https://github.com/Scobalula/Greyhound/blob/master/CHANGELOG.md)
-* Latest Release: [https://github.com/VenomModding/GreyhoundFX/releases](https://github.com/VenomModding/GreyhoundFX/releases)
+* Original Github Repo: [https://github.com/VenomModding/Kobra](https://github.com/VenomModding/Kobra)
+* Change Log: [https://github.com/VenomModding/Kobra/blob/master/CHANGELOG.md](https://github.com/VenomModding/Kobra/blob/master/CHANGELOG.md)
+* Latest Release: [https://github.com/VenomModding/Kobra/releases](https://github.com/VenomModding/Kobra/releases)
 
 ## License/Disclaimer
 
-Greyhound, like Wraith Archon and the WraithX Library, is licensed under the General Public License 3.0, you are free to use Greyhound, both it and its source code, under the terms of the GPL. Greyhound is distributed in the hope it will be useful to, but it comes WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE, see the [LICENSE](https://github.com/Scobalula/Greyhound/blob/master/LICENSE) file for more information.
+Kobra, like Greyhound, Wraith Archon and the WraithX Library, is licensed under the General Public License 3.0, you are free to use Kobra, both it and its source code, under the terms of the GPL. Kobra is distributed in the hope it will be useful to, but it comes WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE, see the [LICENSE](https://github.com/VenomModding/Kobra/blob/master/LICENSE) file for more information.
 
-This repo is in no shape or form associated (apart from being a fork of course) with DTZxPorter or Activision and the developers. These tools are developed to allow users access to assets for use in other Call of Duty SDKs (such as the Black Ops III Mod Tools) and for use in 3D art such as YouTube thumbnails, etc. The assets extracted by these tools are property of their respective owners and what you do with the assets is your own responsbility.
+This repo is in no shape or form associated (apart from being a fork of course) with Scobalula, DTZxPorter or Activision and the developers. These tools are developed to allow users access to assets for use in other Call of Duty SDKs (such as the Black Ops III Mod Tools) and for use in 3D art such as YouTube thumbnails, etc. The assets extracted by these tools are property of their respective owners and what you do with the assets is your own responsbility.
 
-Greyhound is distributed with an automatic updater that will check for updates each time the application is launched by requesting the releases data via the Github API. If you do not wish for Greyhound to check for updates you can simply delete the Greyhound Updater executable.
+Kobra is distributed with an automatic updater that will check for updates each time the application is launched by requesting the releases data via the Github API. If you do not wish for Kobra to check for updates you can simply delete the Kobra Updater executable.
 
 ## Credits/Contributors
 
-* JustVenom - Re-adding FX and GDT support
+* JustVenom - Re-adding FX and GDT support and old Kobra maintainer
+* hindercanrun - New Kobra maintainer
 * Scobalula - Developer/Maintainer/Research
 * Blakintosh - MWR Material Support
 * Eric Maynard - Help on BOCW from ModelGetter, ZM Hashes for BOCW Base
 * DTZxPorter - Original Developer of the entire Wraith Project, Game Research
 * ID-Daemon - Game Research
 
-**If you use GreyhoundFX in any of your projects, it would be highly appreciated if you credit the people/parties listed in the Credits list.**
+**If you use Kobra in any of your projects, it would be highly appreciated if you credit the people/parties listed in the Credits list.**
