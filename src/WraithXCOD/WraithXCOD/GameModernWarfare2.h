@@ -24,6 +24,8 @@ public:
     static std::unique_ptr<XAnim_t> ReadXAnim(const CoDAnim_t* Animation);
     // Reads a XModel from Modern Warfare
     static std::unique_ptr<XModel_t> ReadXModel(const CoDModel_t* Model);
+    // Reads a XImage from Modern Warfare 2
+    static std::unique_ptr<XImageDDS> ReadXImage(const CoDImage_t* Image);
 
     // Reads an XImageDDS from a image reference from Modern Warfare 2
     static std::unique_ptr<XImageDDS> LoadXImage(const XImage_t& Image);
