@@ -108,10 +108,10 @@ static void CleanupFilesystem()
 
 LONG WINAPI MyUnhandledExceptionFilter(EXCEPTION_POINTERS* ExceptionInfo)
 {
-    MessageBoxA(NULL, "Kobra has encountered a fatal error and must close.\n\nA dump file will be written to where Kobra's exe is located, please provide this and as much information as you can when reporting this crash.", "Kobra", MB_OK | MB_ICONERROR);
+    MessageBoxA(NULL, "Kobra has encountered a fatal error and must close.\n\nA dump file will be written to where Kobra's exe is located, please provide this and as much information as you can when reporting this crash.", "Kobra - Fatal Error", MB_OK | MB_ICONERROR);
     
     HANDLE hFile = CreateFile(
-        L"crash_dump.dmp",
+        L"Kobra.dmp",
         GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_DELETE | FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL,
@@ -230,7 +230,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         if (!WraithX::InitializeAPI(true))
         {
             // Failed to initialize
-            MessageBoxA(NULL, "A fatal error occured while initializing Kobra. Maybe contact developer???", "Kobra", MB_OK | MB_ICONEXCLAMATION);
+            MessageBoxA(NULL, "A fatal error occured while initializing Kobra!", "Kobra - Fatal Error", MB_OK | MB_ICONEXCLAMATION);
             // Failed
             return -1;
         }
