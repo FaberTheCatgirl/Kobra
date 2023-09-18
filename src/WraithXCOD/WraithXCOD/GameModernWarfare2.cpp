@@ -5,7 +5,6 @@
 
 // We need the CoDAssets class
 #include "CoDAssets.h"
-#include "CoDRawImageTranslator.h"
 #include "CoDIWITranslator.h"
 
 // We need the following WraithX classes
@@ -33,15 +32,6 @@ std::array<DBGameInfo, 1> GameModernWarfare2::MultiPlayerClientOffsets =
 } };
 // -- Finished with databases
 
-// -- Structures for reading
-
-enum class GfxImageMapType : uint8_t
-{
-    MAPTYPE_CUBE = 0x5
-};
-
-// -- End structures for reading
-
 bool GameModernWarfare2::LoadOffsets()
 {
     // ----------------------------------------------------
@@ -61,7 +51,7 @@ bool GameModernWarfare2::LoadOffsets()
         // Check built-in offsets via game exe mode (SP/MP)
         for (auto& GameOffsets : (CoDAssets::GameFlags == SupportedGameFlags::SP) ? SinglePlayerOffsets : MultiPlayerOffsets)
         {
-            // Read required offsets (XANIM, XMODEL, LOADED SOUND, XIMAGE)
+            // Read required offsets (XANIM, XMODEL, LOADED SOUND)
             CoDAssets::GameOffsetInfos.emplace_back(CoDAssets::GameInstance->Read<uint32_t>(GameOffsets.DBAssetPools + (4 * 2)));
             CoDAssets::GameOffsetInfos.emplace_back(CoDAssets::GameInstance->Read<uint32_t>(GameOffsets.DBAssetPools + (4 * 4)));
             CoDAssets::GameOffsetInfos.emplace_back(CoDAssets::GameInstance->Read<uint32_t>(GameOffsets.DBAssetPools + (4 * 0xD)));
@@ -75,8 +65,6 @@ bool GameModernWarfare2::LoadOffsets()
                 // Read the first string
                 if (!Strings::IsNullOrWhiteSpace(LoadStringEntry(2)))
                 {
-                    // Add ImagePackage offset
-                    CoDAssets::GameOffsetInfos.emplace_back(GameOffsets.ImagePackageTable);
                     // Read and apply sizes
                     CoDAssets::GamePoolSizes.emplace_back(CoDAssets::GameInstance->Read<uint32_t>(GameOffsets.DBPoolSizes + (4 * 2)));
                     CoDAssets::GamePoolSizes.emplace_back(CoDAssets::GameInstance->Read<uint32_t>(GameOffsets.DBPoolSizes + (4 * 4)));
@@ -92,7 +80,6 @@ bool GameModernWarfare2::LoadOffsets()
         // Attempt to locate via heuristic searching
         auto DBAssetsScan = CoDAssets::GameInstance->Scan("56 51 FF D2 8B F0 83 C4 04 85 F6");
         auto StringTableScan = CoDAssets::GameInstance->Scan("8B 44 24 04 2B 05 ?? ?? ?? ?? 3D ?? ?? ?? ?? 1B");
-        auto PackagesTableScan = CoDAssets::GameInstance->Scan("48 83 EC 40 44 8B E1 48 8D 05");
 
         // Check that we had hits
         if (DBAssetsScan > 0 && StringTableScan > 0)
@@ -113,8 +100,6 @@ bool GameModernWarfare2::LoadOffsets()
                 // Read the first string
                 if (!Strings::IsNullOrWhiteSpace(LoadStringEntry(2)))
                 {
-                    // Add ImagePackage offset
-                    CoDAssets::GameOffsetInfos.emplace_back(GameOffsets.ImagePackageTable);
                     // Read and apply sizes
                     CoDAssets::GamePoolSizes.emplace_back(CoDAssets::GameInstance->Read<uint32_t>(GameOffsets.DBPoolSizes + (4 * 2)));
                     CoDAssets::GamePoolSizes.emplace_back(CoDAssets::GameInstance->Read<uint32_t>(GameOffsets.DBPoolSizes + (4 * 4)));
@@ -135,7 +120,6 @@ bool GameModernWarfare2::LoadAssets()
     // Prepare to load game assets, into the AssetPool
     bool NeedsAnims = (SettingsManager::GetSetting("showxanim", "true") == "true");
     bool NeedsModels = (SettingsManager::GetSetting("showxmodel", "true") == "true");
-    bool NeedsImages = (SettingsManager::GetSetting("showximage", "false") == "true");
     bool NeedsSounds = (SettingsManager::GetSetting("showxsounds", "false") == "true");
 
     // Check if we need assets
@@ -276,75 +260,6 @@ bool GameModernWarfare2::LoadAssets()
         }
     }
 
-    if (NeedsImages)
-    {
-        // Images are the third offset and third pool, skip 8 byte pointer to free head
-        auto ImageOffset = CoDAssets::GameOffsetInfos[2] + 8;
-        auto ImageCount = CoDAssets::GamePoolSizes[2];
-
-        // Calculate maximum pool size
-        auto MaximumPoolOffset = (ImageCount * sizeof(MWRGfxImage)) + ImageOffset;
-        // Store original offset
-        auto MinimumPoolOffset = CoDAssets::GameOffsetInfos[2];
-
-        // Loop and read
-        for (uint32_t i = 0; i < ImageCount; i++)
-        {
-            // Read
-            auto ImageResult = CoDAssets::GameInstance->Read<MWRGfxImage>(ImageOffset);
-
-            // Check whether or not to skip, if the handle is 0, or, if the handle is a pointer within the current pool
-            if ((ImageResult.NextHead > MinimumPoolOffset && ImageResult.NextHead < MaximumPoolOffset) || ImageResult.NamePtr == 0)
-            {
-                // Advance
-                ImageOffset += sizeof(MWRGfxImage);
-                // Skip this asset
-                continue;
-            }
-
-            // Validate and load if need be
-            auto ImageName = FileSystems::GetFileName(CoDAssets::GameInstance->ReadNullTerminatedString(ImageResult.NamePtr));
-
-
-
-            // Check if it's streamed
-            if (ImageResult.Streamed > 0)
-            {
-                // Calculate the largest image mip
-                uint32_t LargestMip = 0;
-                uint32_t LargestWidth = ImageResult.Width;
-                uint32_t LargestHeight = ImageResult.Height;
-
-                // Loop and calculate
-                for (uint32_t i = 0; i < 3; i++)
-                {
-                    // Compare widths
-                    if (ImageResult.MipLevels[i].Width > LargestWidth)
-                    {
-                        LargestMip = (i + 1);
-                        LargestWidth = ImageResult.MipLevels[i].Width;
-                        LargestHeight = ImageResult.MipLevels[i].Height;
-                    }
-                }
-
-                // Make and add
-                auto LoadedImage = new CoDImage_t();
-                // Set
-                LoadedImage->AssetName = ImageName;
-                LoadedImage->AssetPointer = ImageOffset;
-                LoadedImage->Width = (uint16_t)LargestWidth;
-                LoadedImage->Height = (uint16_t)LargestHeight;
-                LoadedImage->Format = ImageResult.ImageFormat;
-                LoadedImage->AssetStatus = WraithAssetStatus::Loaded;
-
-                // Add
-                CoDAssets::GameAssets->LoadedAssets.push_back(LoadedImage);
-            }
-
-            // Advance
-            ImageOffset += sizeof(MWRGfxImage);
-        }
-    }
 
     if (NeedsSounds)
     {
@@ -570,33 +485,6 @@ std::unique_ptr<XModel_t> GameModernWarfare2::ReadXModel(const CoDModel_t* Model
     // Not running
     return nullptr;
 }
-
-std::unique_ptr<XImageDDS> GameModernWarfare2::ReadXImage(const CoDImage_t* Image)
-{
-    // Proxy the image off, determine type if need be
-    auto Usage = (Image->Format == 84) ? ImageUsageType::NormalMap : ImageUsageType::DiffuseMap;
-    // Second phase check
-    if (Usage == ImageUsageType::DiffuseMap)
-    {
-        // Compare name
-        if (Strings::EndsWith(Image->AssetName, "_n") || Strings::EndsWith(Image->AssetName, "_nml"))
-        {
-            // Set
-            Usage = ImageUsageType::NormalMap;
-        }
-    }
-
-    return LoadXImage(XImage_t(Usage, 0, Image->AssetPointer, Image->AssetName));
-}
-
-struct XImageData
-{
-    uint16_t Locale;
-    uint16_t PackageIndex;
-    uint32_t Checksum;
-    uint64_t Offset;
-    uint64_t Size;
-};
 
 const XMaterial_t GameModernWarfare2::ReadXMaterial(uint64_t MaterialPointer)
 {
