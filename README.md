@@ -1,12 +1,12 @@
 [![Releases](https://img.shields.io/github/downloads/VenomModding/Kobra/total.svg)](https://github.com/VenomModding/Kobra/releases)
 [![License](https://img.shields.io/github/license/VenomModding/Kobra.svg)](https://github.com/VenomModding/Kobra/blob/master/LICENSE)
-[![Discord](https://img.shields.io/badge/chat-Discord-blue.svg)](https://t.co/6IyEfOn62i)
+[![Discord](https://img.shields.io/badge/chat-Discord-blue.svg)](https://discord.com/invite/4nbDEytXXc)
 
 Kobra is a fork of [Greyhound](https://github.com/Scobalula/Greyhound), an asset extractor for various titles running on the [IW Engine](https://en.wikipedia.org/wiki/IW_(game_engine)) (primarily Call of Duty games), and is based off the famous [Wraith Archon](https://github.com/dtzxporter/WraithXArchon/) that was originally developed by [DTZxPorter](https://github.com/dtzxporter/). Kobra's aim is to provide people access to assets from the games for various purposes including working mods such custom zombie maps or weapon mods, 3D Art, and thumbnails for content creation. Kobra adds XEffect and GDT support, due to it being cut from Greyhound because "barely any users used it".
 
 For detailed information such as game support, settings, FAQs, etc. please refer to the original Greyhound's wiki: [Wiki](https://scobalula.github.io/Greyhound/) Work is being done to populate the wiki with information and tutorials so stay tuned!
 
-For more support you can hop into my Discord: [https://t.co/6IyEfOn62i](https://t.co/6IyEfOn62i)
+For more support you can hop into my Discord: [https://discord.com/invite/4nbDEytXXc](https://discord.com/invite/4nbDEytXXc)
 
 ## Ricochet Info
 
@@ -21,7 +21,7 @@ Ricochet means we can no longer export from in-game, Parasyte is now required th
 * Official copies of the games (only the latest copies from official distributors are tested)
 
 ## Current plans
-* Possible implementation of ripping Infinity Ward (IW1/IW2/IW3/IW4/IW5/IW6/IW7) and Sledgehammer-based (S1, S2, H1, H2) FXs using the implementation of [ZoneTool](https://github.com/ZoneTool/zonetool)
+* Possible implementation of ripping Infinity Ward (IW1/IW2/IW3/IW4/IW5/IW6/IW7/IW8) and Sledgehammer-based (S1, S2, S4, H1, H2) FXs using the implementation of [ZoneTool](https://github.com/ZoneTool/zonetool)
 * Build Mecha inside of Kobra, for easier sound ripping...
 * Figure out the Parasyte source code to get COD: Online support working, for models + anim ripping (using [Momo5502](https://github.com/momo5502)'s IFS ripping tools to rip the Models + Anims)
 
@@ -35,9 +35,8 @@ The following tools/plugins are required/recommended for some assets/games:
 * [DarkIris](https://aviacreations.com/modme/index.php?view=topic&tid=831) by DTZxPorter (Texture Utils) (Paint .NET)
 
 ## Links:
-* Discord Server: [https://t.co/6IyEfOn62i](https://t.co/6IyEfOn62i)
+* Discord Server: [https://discord.com/invite/4nbDEytXXc](https://discord.com/invite/4nbDEytXXc)
 * This Github Repo: [https://github.com/VenomModding/Kobra](https://github.com/VenomModding/Kobra)
-* Original Github Repo: [https://github.com/VenomModding/Kobra](https://github.com/VenomModding/Kobra)
 * Change Log: [https://github.com/VenomModding/Kobra/blob/master/CHANGELOG.md](https://github.com/VenomModding/Kobra/blob/master/CHANGELOG.md)
 * Latest Release: [https://github.com/VenomModding/Kobra/releases](https://github.com/VenomModding/Kobra/releases)
 
