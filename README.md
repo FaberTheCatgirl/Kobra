@@ -6,7 +6,7 @@ Kobra is a fork of [Greyhound](https://github.com/Scobalula/Greyhound), an asset
 
 For detailed information such as game support, settings, FAQs, etc. please refer to the original Greyhound's wiki: [Wiki](https://scobalula.github.io/Greyhound/) Work is being done to populate the wiki with information and tutorials so stay tuned!
 
-For more support you can hop into my Discord: [https://discord.com/invite/4nbDEytXXc](https://discord.com/invite/4nbDEytXXc)
+We will no longer provide support in the Discord as it has been archived due to Venom leaving the CoD Modding scene. However a link will be provided. -> [Venom Modding Archives](https://discord.com/invite/4nbDEytXXc)
 
 ## Ricochet Info
 
@@ -35,7 +35,7 @@ The following tools/plugins are required/recommended for some assets/games:
 * [DarkIris](https://aviacreations.com/modme/index.php?view=topic&tid=831) by DTZxPorter (Texture Utils) (Paint .NET)
 
 ## Links:
-* Discord Server: [https://discord.com/invite/4nbDEytXXc](https://discord.com/invite/4nbDEytXXc)
+* Discord Server: [https://discord.com/invite/VenomModdingArchives](https://discord.com/invite/4nbDEytXXc)
 * This Github Repo: [https://github.com/VenomModding/Kobra](https://github.com/VenomModding/Kobra)
 * Change Log: [https://github.com/VenomModding/Kobra/blob/master/CHANGELOG.md](https://github.com/VenomModding/Kobra/blob/master/CHANGELOG.md)
 * Latest Release: [https://github.com/VenomModding/Kobra/releases](https://github.com/VenomModding/Kobra/releases)
