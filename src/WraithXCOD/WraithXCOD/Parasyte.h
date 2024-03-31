@@ -73,13 +73,15 @@ namespace ps
     struct XAssetPool64
     {
         // The start of the asset chain.
-        uint64_t FirstXAsset;
+        uint64_t Root;
         // The end of the asset chain.
-        uint64_t LastXAsset;
+        uint64_t End;
         // The asset hash table for this pool.
         uint64_t LookupTable;
         // Storage for asset headers for this pool.
         uint64_t HeaderMemory;
+        // Storage for asset entries for this pool.
+        uint64_t AssetMemory;
     };
 
     // Current State Information

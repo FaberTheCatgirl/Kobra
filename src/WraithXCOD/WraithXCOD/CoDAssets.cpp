@@ -418,14 +418,14 @@ std::map<uint32_t, std::string> SemanticHashes =
 const std::vector<CoDGameProcess> CoDAssets::GameProcessInfo =
 {
     // World at War
-    { "codwaw.exe", SupportedGames::WorldAtWar, SupportedGameFlags::SP },
+    { "CoDWaW.exe", SupportedGames::WorldAtWar, SupportedGameFlags::SP },
     { "t4sp.exe", SupportedGames::WorldAtWar, SupportedGameFlags::SP },
-    { "codwawmp.exe", SupportedGames::WorldAtWar, SupportedGameFlags::MP },
+    { "CoDWaWMP.exe", SupportedGames::WorldAtWar, SupportedGameFlags::MP },
     { "t4mp.exe", SupportedGames::WorldAtWar, SupportedGameFlags::MP },
     // Black Ops
-    { "blackops.exe", SupportedGames::BlackOps, SupportedGameFlags::SP },
+    { "BlackOps.exe", SupportedGames::BlackOps, SupportedGameFlags::SP },
     { "t5sp.exe", SupportedGames::BlackOps, SupportedGameFlags::SP },
-    { "blackopsmp.exe", SupportedGames::BlackOps, SupportedGameFlags::MP },
+    { "BlackOpsMP.exe", SupportedGames::BlackOps, SupportedGameFlags::MP },
     { "t5mp.exe", SupportedGames::BlackOps, SupportedGameFlags::MP },
     // Black Ops 2
     { "t6zm.exe", SupportedGames::BlackOps2, SupportedGameFlags::ZM },
@@ -434,11 +434,11 @@ const std::vector<CoDGameProcess> CoDAssets::GameProcessInfo =
     { "t6mpv43.exe", SupportedGames::BlackOps2, SupportedGameFlags::MP },
     { "t6sp.exe", SupportedGames::BlackOps2, SupportedGameFlags::SP },
     // Black Ops 3
-    { "blackops3.exe", SupportedGames::BlackOps3, SupportedGameFlags::SP },
+    { "BlackOps3.exe", SupportedGames::BlackOps3, SupportedGameFlags::SP },
     // Black Ops 4
-    { "blackops4.exe", SupportedGames::BlackOps4, SupportedGameFlags::SP },
+    { "BlackOps4.exe", SupportedGames::BlackOps4, SupportedGameFlags::SP },
     // Black Ops CW
-    { "blackopscoldwar.exe", SupportedGames::BlackOpsCW, SupportedGameFlags::SP },
+    { "BlackOpsColdWar.exe", SupportedGames::BlackOpsCW, SupportedGameFlags::SP },
     // Modern Warfare
     { "iw3sp.exe", SupportedGames::ModernWarfare, SupportedGameFlags::SP },
     { "iw3sp_mod.exe", SupportedGames::ModernWarfare, SupportedGameFlags::SP },
@@ -450,7 +450,6 @@ const std::vector<CoDGameProcess> CoDAssets::GameProcessInfo =
     { "iw4x-sp.exe", SupportedGames::ModernWarfare2, SupportedGameFlags::SP },
     { "iw4mp.exe", SupportedGames::ModernWarfare2, SupportedGameFlags::MP },
     { "iw4x.exe",  SupportedGames::ModernWarfare2, SupportedGameFlags::MP },
-    { "m2.exe",  SupportedGames::ModernWarfare2, SupportedGameFlags::SP },
     // Modern Warfare 3
     { "iw5sp.exe", SupportedGames::ModernWarfare3, SupportedGameFlags::SP },
     { "iw5-mod.exe", SupportedGames::ModernWarfare3, SupportedGameFlags::SP },

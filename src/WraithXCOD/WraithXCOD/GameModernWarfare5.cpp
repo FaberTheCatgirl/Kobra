@@ -109,7 +109,7 @@ bool GameModernWarfare5::LoadAssets()
     if (NeedsModels)
     {
         auto Pool = CoDAssets::GameInstance->Read<ps::XAssetPool64>(ps::state->PoolsAddress + 9 * sizeof(ps::XAssetPool64));
-        ps::PoolParser64(Pool.FirstXAsset, CoDAssets::ParasyteRequest, [](ps::XAsset64& Asset)
+        ps::PoolParser64(Pool.Root, CoDAssets::ParasyteRequest, [](ps::XAsset64& Asset)
             {
                 // Read
                 auto ModelResult = CoDAssets::GameInstance->Read<MW5XModel>(Asset.Header);
@@ -144,7 +144,7 @@ bool GameModernWarfare5::LoadAssets()
     if (NeedsImages)
     {
         auto Pool = CoDAssets::GameInstance->Read<ps::XAssetPool64>(ps::state->PoolsAddress + 19 * sizeof(ps::XAssetPool64));
-        ps::PoolParser64(Pool.FirstXAsset, CoDAssets::ParasyteRequest, [](ps::XAsset64& Asset)
+        ps::PoolParser64(Pool.Root, CoDAssets::ParasyteRequest, [](ps::XAsset64& Asset)
             {
                 // Read
                 auto ImageResult = CoDAssets::GameInstance->Read<MW5GfxImage>(Asset.Header);
@@ -172,7 +172,7 @@ bool GameModernWarfare5::LoadAssets()
     if (NeedsAnims)
     {
         auto Pool = CoDAssets::GameInstance->Read<ps::XAssetPool64>(ps::state->PoolsAddress + 7 * sizeof(ps::XAssetPool64));
-        ps::PoolParser64(Pool.FirstXAsset, CoDAssets::ParasyteRequest, [](ps::XAsset64& Asset)
+        ps::PoolParser64(Pool.Root, CoDAssets::ParasyteRequest, [](ps::XAsset64& Asset)
             {
                 // Read
                 auto AnimResult = CoDAssets::GameInstance->Read<MW5XAnim>(Asset.Header);
@@ -199,7 +199,7 @@ bool GameModernWarfare5::LoadAssets()
     if (NeedsMaterials)
     {
         auto Pool = CoDAssets::GameInstance->Read<ps::XAssetPool64>(ps::state->PoolsAddress + 11 * sizeof(ps::XAssetPool64));
-        ps::PoolParser64(Pool.FirstXAsset, CoDAssets::ParasyteRequest, [](ps::XAsset64& Asset)
+        ps::PoolParser64(Pool.Root, CoDAssets::ParasyteRequest, [](ps::XAsset64& Asset)
             {
                 // Check for SP Files
                 if (CoDAssets::GameFlags == SupportedGameFlags::SP)
@@ -256,7 +256,7 @@ bool GameModernWarfare5::LoadAssets()
     if (NeedsSounds)
     {
         auto Pool = CoDAssets::GameInstance->Read<ps::XAssetPool64>(ps::state->PoolsAddress + 197 * sizeof(ps::XAssetPool64));
-        ps::PoolParser64(Pool.FirstXAsset, CoDAssets::ParasyteRequest, [](ps::XAsset64& Asset)
+        ps::PoolParser64(Pool.Root, CoDAssets::ParasyteRequest, [](ps::XAsset64& Asset)
             {
                 // Read
                 auto SoundResult = CoDAssets::GameInstance->Read<MW5SndAsset>(Asset.Header);
