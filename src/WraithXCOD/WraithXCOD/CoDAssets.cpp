@@ -11,6 +11,7 @@
 #include "Image.h"
 #include "Sound.h"
 #include "BinaryReader.h"
+#include "HalfFloats.h"
 
 // We need the CDN Downloaders
 #include "CoDCDNDownloader.h"
@@ -420,18 +421,24 @@ const std::vector<CoDGameProcess> CoDAssets::GameProcessInfo =
     // World at War
     { "CoDWaW.exe", SupportedGames::WorldAtWar, SupportedGameFlags::SP },
     { "t4sp.exe", SupportedGames::WorldAtWar, SupportedGameFlags::SP },
+    { "plutonium-bootstrapper-win32.exe", SupportedGames::WorldAtWar, SupportedGameFlags::SP },
     { "CoDWaWMP.exe", SupportedGames::WorldAtWar, SupportedGameFlags::MP },
     { "t4mp.exe", SupportedGames::WorldAtWar, SupportedGameFlags::MP },
+    { "plutonium-bootstrapper-win32.exe", SupportedGames::WorldAtWar, SupportedGameFlags::MP },
     // Black Ops
     { "BlackOps.exe", SupportedGames::BlackOps, SupportedGameFlags::SP },
     { "t5sp.exe", SupportedGames::BlackOps, SupportedGameFlags::SP },
+    { "plutonium-bootstrapper-win32.exe", SupportedGames::BlackOps, SupportedGameFlags::SP },
     { "BlackOpsMP.exe", SupportedGames::BlackOps, SupportedGameFlags::MP },
     { "t5mp.exe", SupportedGames::BlackOps, SupportedGameFlags::MP },
+    { "plutonium-bootstrapper-win32.exe", SupportedGames::BlackOps, SupportedGameFlags::MP },
     // Black Ops 2
     { "t6zm.exe", SupportedGames::BlackOps2, SupportedGameFlags::ZM },
     { "t6zmv41.exe", SupportedGames::BlackOps2, SupportedGameFlags::ZM },
+    { "plutonium-bootstrapper-win32.exe", SupportedGames::BlackOps2, SupportedGameFlags::ZM },
     { "t6mp.exe", SupportedGames::BlackOps2, SupportedGameFlags::MP },
     { "t6mpv43.exe", SupportedGames::BlackOps2, SupportedGameFlags::MP },
+    { "plutonium-bootstrapper-win32.exe", SupportedGames::BlackOps2, SupportedGameFlags::MP },
     { "t6sp.exe", SupportedGames::BlackOps2, SupportedGameFlags::SP },
     // Black Ops 3
     { "BlackOps3.exe", SupportedGames::BlackOps3, SupportedGameFlags::SP },
@@ -454,6 +461,7 @@ const std::vector<CoDGameProcess> CoDAssets::GameProcessInfo =
     { "iw5sp.exe", SupportedGames::ModernWarfare3, SupportedGameFlags::SP },
     { "iw5-mod.exe", SupportedGames::ModernWarfare3, SupportedGameFlags::SP },
     { "iw5mp.exe", SupportedGames::ModernWarfare3, SupportedGameFlags::MP },
+    { "plutonium-bootstrapper-win32.exe", SupportedGames::ModernWarfare3, SupportedGameFlags::MP },
     // Ghosts
     { "iw6sp64_ship.exe", SupportedGames::Ghosts, SupportedGameFlags::SP },
     { "iw6-mod.exe", SupportedGames::Ghosts, SupportedGameFlags::SP },
@@ -1027,6 +1035,8 @@ ExportGameResult CoDAssets::ExportAsset(const CoDAsset_t* Asset)
     case WraithAssetType::RawFile: Result = ExportRawfileAsset((CoDRawFile_t*)Asset, ExportPath); break;
     // Export a material
     case WraithAssetType::Material: Result = ExportMaterialAsset((CoDMaterial_t*)Asset, ExportPath, ImagesPath, ImageRelativePath, ImageExtension); break;
+
+    case WraithAssetType::Map: Result = ExportMapAsset((CoDMap_t*)Asset, ExportPath); break;
     }
 
     // Success, unless specific error
@@ -1520,6 +1530,19 @@ std::unique_ptr<XModel_t> CoDAssets::LoadGenericModelAsset(const CoDModel_t* Mod
     // Unknown game
     return nullptr;
 }
+
+std::unique_ptr<XMap_t> CoDAssets::LoadGenericMapAsset(const CoDMap_t* Map)
+{
+    // Read from game
+    switch (CoDAssets::GameID)
+    {
+    case SupportedGames::BlackOps2: return GameBlackOps2::ReadXMap(Map); break;
+    }
+
+    // Unknown game
+    return nullptr;
+}
+
 
 bool CoDAssets::ShouldExportAnim(std::string ExportPath)
 {
@@ -2095,6 +2118,24 @@ ExportGameResult CoDAssets::ExportMaterialAsset(const CoDMaterial_t* Material, c
     return ExportGameResult::Success;
 }
 
+ExportGameResult CoDAssets::ExportMapAsset(const CoDMap_t* Map, const std::string& ExportPath)
+{
+    bool ExportXModels = SettingsManager::GetSetting("map_exportxmodels") == "true";
+
+    std::unique_ptr<XMap_t> GenericMap = LoadGenericMapAsset(Map);
+
+    for (MapSurface_t Surface : GenericMap->Surfaces)
+    {
+        ExportMaterialImages(Surface.Material[0], ExportPath, ".png", ImageFormat::Standard_PNG);
+    }
+
+    std::unique_ptr<WraithModel> ModelResult = CoDXModelTranslator::TranslateXMap(GenericMap, false);
+
+    ExportWraithModelMap(ModelResult, ExportPath);
+
+    return ExportGameResult::Success;
+}
+
 void CoDAssets::ExportWraithModel(const std::unique_ptr<WraithModel>& Model, const std::string& ExportPath)
 {
     // Write Cosmetic List
@@ -2133,11 +2174,11 @@ void CoDAssets::ExportWraithModel(const std::unique_ptr<WraithModel>& Model, con
     // The following formats are scaled
     Model->ScaleModel(2.54f);
 
-    // Check for Obj format
     if (SettingsManager::GetSetting("export_obj") == "true")
     {
         // Export a Obj file
-        WavefrontOBJ::ExportOBJ(*Model.get(), FileSystems::CombinePath(ExportPath, Model->AssetName + ".obj"));
+        //WavefrontOBJ::ExportOBJ(*Model.get(), FileSystems::CombinePath(ExportPath, Model->AssetName + ".obj"));
+        WavefrontOBJ::ExportOBJ(*Model.get(), FileSystems::CombinePath(ExportPath, Model->AssetName + ".obj"), true);
     }
     // Check for Maya format
     if (SettingsManager::GetSetting("export_ma") == "true")
@@ -2177,6 +2218,10 @@ void CoDAssets::ExportWraithModel(const std::unique_ptr<WraithModel>& Model, con
     }
     // Prepare GDT info
     CoDAssets::GameGDTProcessor->ProcessModelGDT(Model);
+}
+
+void CoDAssets::ExportWraithModelMap(const std::unique_ptr<WraithModel>& Model, const std::string& ExportPath)
+{
 }
 
 void CoDAssets::CleanupPackageCache()

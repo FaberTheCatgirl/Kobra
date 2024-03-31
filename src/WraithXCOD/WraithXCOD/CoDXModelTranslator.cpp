@@ -320,7 +320,6 @@ std::unique_ptr<WraithModel> CoDXModelTranslator::TranslateXModel(const std::uni
         {
             // Create and grab a new submesh
             auto& Mesh = ModelResult->AddSubmesh();
-
             // Set the material (COD has 1 per submesh)
             Mesh.AddMaterial(Submesh.MaterialIndex);
 
@@ -499,6 +498,266 @@ std::unique_ptr<WraithModel> CoDXModelTranslator::TranslateXModel(const std::uni
 
     // Return it
     return ModelResult;
+}
+
+std::unique_ptr<WraithModel> CoDXModelTranslator::TranslateXMap(const std::unique_ptr<XMap_t>& Map, bool ExpotXModels)
+{
+    GfxMap_t GfxMap = Map->GfxMap;
+
+    std::unique_ptr<WraithModel> ModelResult = std::make_unique<WraithModel>();
+    ModelResult->AssetName = CoDAssets::GameInstance->ReadNullTerminatedString(GfxMap.MapNamePointer);
+
+    std::map<std::string, uint32_t> UniqueMaterials;
+    std::map<std::string, uint32_t> UniqueBlendMaterials;
+
+    for (uint32_t i = 0; i < Map->Surfaces.size(); i++)
+    {
+        XMaterial_t Material = Map->Surfaces[i].Material[0];
+
+        std::string MaterialName = Material.MaterialName;
+        MaterialName = Strings::Replace(Strings::Replace(Strings::Replace(MaterialName, "*", ""), ")", ""), "(", "");
+        MaterialName.erase(0, MaterialName.find("/") + 1);
+
+        uint32_t NumBlendMats = std::count(MaterialName.begin(), MaterialName.end(), ':');
+
+        if (NumBlendMats != 0)
+        {
+            uint32_t BlendMat = MaterialName.find("/");
+            uint32_t Start = MaterialName.find(":");
+            MaterialName.erase(Start + 1, BlendMat - Start);
+
+            uint32_t SecondStart = MaterialName.find(":", Start + 1);
+            if (SecondStart != std::string::npos)
+            {
+                uint32_t SecondBlendMat = MaterialName.find("/");
+
+                MaterialName.erase(SecondStart + 1, SecondBlendMat - SecondStart);
+            }
+        }
+
+        auto FindResult = UniqueMaterials.find(MaterialName);
+
+        /* Material IDs:
+         * #X0 = Base Material
+         * #X1 = Blend Material
+         * #X2 = Blend Submaterial
+         * #X3 = Decal
+         *
+         * #0X = Default
+         * #1X = Simple Material
+         */
+        if (FindResult != UniqueMaterials.end())
+        {
+            Map->Surfaces[i].MaterialIndex = UniqueMaterials[MaterialName];
+        }
+        else
+        {
+            //ASSERT(MaterialName != "zm_tm_mud_slow02");
+
+            // Create blend materials if present
+            std::vector<std::string> BlendMaterialNames = SplitString(MaterialName, ':');
+
+            for (uint32_t BlendIndex = 1; BlendIndex < NumBlendMats + 1; BlendIndex++)
+            {
+                auto BlendFindResult = UniqueBlendMaterials.find(BlendMaterialNames[BlendIndex]);
+
+                if (BlendFindResult != UniqueBlendMaterials.end())
+                {
+                    continue;
+                }
+
+                WraithMaterial& wraithMaterial = ModelResult->AddMaterial();
+
+                std::string MaterialSuffix = "#02";
+                /*if (Material.Images.size() == 2)
+                {
+                    MaterialSuffix = "#12";
+                }
+                else
+                {
+                    MaterialSuffix = "#02";
+                }*/
+
+                wraithMaterial.MaterialName = BlendMaterialNames[BlendIndex] + MaterialSuffix;
+
+
+                for (uint32_t ImageIndex = 0; ImageIndex < Material.Images.size(); ImageIndex++)
+                {
+                    XImage_t MaterialImage = Material.Images[ImageIndex];
+
+                    switch (Material.Images[ImageIndex].SemanticHash)
+                    {
+                    case 0xB60D1850: wraithMaterial.DiffuseMapName = CoDAssets::GameInstance->ReadNullTerminatedString(CoDAssets::GameInstance->Read<uint32_t>(MaterialImage.ImagePtr + 0x48)) + ".png"; break; // Blend Color
+                    case 0x9434AEDE: wraithMaterial.NormalMapName = CoDAssets::GameInstance->ReadNullTerminatedString(CoDAssets::GameInstance->Read<uint32_t>(MaterialImage.ImagePtr + 0x48)) + ".png"; break; // Blend Normal
+                    case 0xD2866322: wraithMaterial.SpecularMapName = CoDAssets::GameInstance->ReadNullTerminatedString(CoDAssets::GameInstance->Read<uint32_t>(MaterialImage.ImagePtr + 0x48)) + ".png"; break; // Decal / Blend Specular
+                    //case 0x9434AEDD: printf("Test"); break; // Decal Normal
+                    //case 0xB60D1853: printf("Test"); break; // Decal Color
+                    //case 0xD2866321: printf("Test"); break; // ~$black-rgbl
+                    }
+                }
+
+                UniqueBlendMaterials.insert(std::make_pair(BlendMaterialNames[BlendIndex], Map->Surfaces[i].MaterialIndex));
+            }
+
+            // Create default material for surface
+            WraithMaterial& wraithMaterial = ModelResult->AddMaterial();
+
+            std::string MaterialSuffix = "";
+            if (NumBlendMats > 0 && Material.Images.size() > 2)
+            {
+                MaterialSuffix = "#01";
+            }
+            else //if (NumBlendMats <= 0 && Material.Images.size() > 2)
+            {
+                MaterialSuffix = "#00";
+            }
+            /*else if (NumBlendMats > 0 && Material.Images.size() == 2)
+            {
+                MaterialSuffix = "#11";
+            }
+            else if (NumBlendMats <= 0 && Material.Images.size() == 2)
+            {
+                MaterialSuffix = "#10";
+            }*/
+
+            wraithMaterial.MaterialName = MaterialName + MaterialSuffix;
+
+            for (uint32_t ImageIndex = 0; ImageIndex < Material.Images.size(); ImageIndex++)
+            {
+                XImage_t MaterialImage = Material.Images[ImageIndex];
+
+                switch (Material.Images[ImageIndex].SemanticHash)
+                {
+                case 0xA0AB1041: wraithMaterial.DiffuseMapName = CoDAssets::GameInstance->ReadNullTerminatedString(CoDAssets::GameInstance->Read<uint32_t>(MaterialImage.ImagePtr + 0x48)) + ".png"; break;
+                case 0x59D30D0F: wraithMaterial.NormalMapName = CoDAssets::GameInstance->ReadNullTerminatedString(CoDAssets::GameInstance->Read<uint32_t>(MaterialImage.ImagePtr + 0x48)) + ".png"; break;
+                case 0x34ECCCB3: wraithMaterial.SpecularMapName = CoDAssets::GameInstance->ReadNullTerminatedString(CoDAssets::GameInstance->Read<uint32_t>(MaterialImage.ImagePtr + 0x48)) + ".png"; break;
+                }
+            }
+
+            Map->Surfaces[i].MaterialIndex = (uint32_t)UniqueMaterials.size();
+            UniqueMaterials.insert(std::make_pair(MaterialName, Map->Surfaces[i].MaterialIndex));
+        }
+    }
+
+    uintptr_t ReadDataSize = 0;
+
+    unsigned long long VerticiesLength = sizeof(GfxVertexBuffer) * GfxMap.GfxVertexCount;
+
+    MemoryReader VertexData = MemoryReader(CoDAssets::GameInstance->Read(GfxMap.GfxVerticesPointer, VerticiesLength, ReadDataSize), VerticiesLength);
+    std::unique_ptr<uint16_t> IndexData = ReadGfxIndices(GfxMap.GfxIndicesPointer, GfxMap.GfxIndicesCount);
+
+    ModelResult->PrepareSubmeshes(Map->Surfaces.size());
+
+
+    for (MapSurface_t Surface : Map->Surfaces)
+    {
+        uint32_t vertexIndex = 0;
+
+        WraithSubmesh& Mesh = ModelResult->AddSubmesh();
+        Mesh.AddMaterial(Surface.MaterialIndex);
+        Mesh.PrepareMesh(Surface.VertexCount, Surface.FaceCount);
+
+        for (uint32_t i = 0; i < Surface.FaceCount; i++)
+        {
+            uint16_t faceIndex1 = IndexData.get()[i * 3 + Surface.FaceIndex];
+            uint16_t faceIndex2 = IndexData.get()[i * 3 + Surface.FaceIndex + 1];
+            uint16_t faceIndex3 = IndexData.get()[i * 3 + Surface.FaceIndex + 2];
+
+            // Validate unique points
+            if (faceIndex1 != faceIndex2 && faceIndex1 != faceIndex3 && faceIndex2 != faceIndex3)
+            {
+                WraithVertex& newVertex1 = Mesh.AddVertex();
+                GfxVertexBuffer Vertex1 = ReadGfxVertices(GfxMap.GfxVerticesPointer, Surface.VertexBufferOffset + faceIndex1 * 36);
+
+                newVertex1.Position = Vertex1.Position;
+                newVertex1.AddUVLayer(HalfFloats::ToFloat(Vertex1.UVUPos), 1 - HalfFloats::ToFloat(Vertex1.UVVPos));
+                newVertex1.Normal = UnpackNormalB(Vertex1.Normal);
+                newVertex1.Color[0] = Vertex1.Color[0];
+                newVertex1.Color[1] = Vertex1.Color[1];
+                newVertex1.Color[2] = Vertex1.Color[2];
+                newVertex1.Color[3] = Vertex1.Color[3];
+
+                WraithVertex& newVertex2 = Mesh.AddVertex();
+                GfxVertexBuffer Vertex2 = ReadGfxVertices(GfxMap.GfxVerticesPointer, Surface.VertexBufferOffset + faceIndex2 * 36);
+
+                newVertex2.Position = Vertex2.Position;
+                newVertex2.AddUVLayer(HalfFloats::ToFloat(Vertex2.UVUPos), 1 - HalfFloats::ToFloat(Vertex2.UVVPos));
+                newVertex2.Normal = UnpackNormalB(Vertex2.Normal);
+                newVertex2.Color[0] = Vertex2.Color[0];
+                newVertex2.Color[1] = Vertex2.Color[1];
+                newVertex2.Color[2] = Vertex2.Color[2];
+                newVertex2.Color[3] = Vertex2.Color[3];
+
+                WraithVertex& newVertex3 = Mesh.AddVertex();
+                GfxVertexBuffer Vertex3 = ReadGfxVertices(GfxMap.GfxVerticesPointer, Surface.VertexBufferOffset + faceIndex3 * 36);
+
+                newVertex3.Position = Vertex3.Position;
+                newVertex3.AddUVLayer(HalfFloats::ToFloat(Vertex3.UVUPos), 1 - HalfFloats::ToFloat(Vertex3.UVVPos));
+                newVertex3.Normal = UnpackNormalB(Vertex3.Normal);
+                newVertex3.Color[0] = Vertex3.Color[0];
+                newVertex3.Color[1] = Vertex3.Color[1];
+                newVertex3.Color[2] = Vertex3.Color[2];
+                newVertex3.Color[3] = Vertex3.Color[3];
+
+                Mesh.AddFace(vertexIndex, vertexIndex + 1, vertexIndex + 2);
+
+                vertexIndex += 3;
+            }
+        }
+    }
+
+    return ModelResult;
+}
+
+std::unique_ptr<uint16_t> CoDXModelTranslator::ReadGfxIndices(uint64_t Address, uint32_t Count)
+{
+    std::unique_ptr<uint16_t> indices((uint16_t*)malloc(Count * sizeof(uint16_t)));
+
+    uintptr_t result = 0;
+    int8_t* byteBuffer = CoDAssets::GameInstance->Read(Address, Count * 2, result);
+
+    memcpy(indices.get(), byteBuffer, Count * 2);
+
+    return indices;
+}
+
+GfxVertexBuffer CoDXModelTranslator::ReadGfxVertices(uint64_t Address, uint32_t StartIndex)
+{
+    GfxVertexBuffer VertexBuffer;
+    SupportedGames CurrentGame = CoDAssets::GameID;
+
+    switch (CurrentGame)
+    {
+    case SupportedGames::BlackOps2:
+        BO2GfxVertexBuffer BO2VertexBuffer = CoDAssets::GameInstance->Read<BO2GfxVertexBuffer>(Address + StartIndex);
+
+        VertexBuffer.Position = BO2VertexBuffer.Position;
+        VertexBuffer.BiNormal = BO2VertexBuffer.BiNormal;
+        VertexBuffer.Color[0] = BO2VertexBuffer.Color[0];
+        VertexBuffer.Color[1] = BO2VertexBuffer.Color[1];
+        VertexBuffer.Color[2] = BO2VertexBuffer.Color[2];
+        VertexBuffer.Color[3] = BO2VertexBuffer.Color[3];
+        VertexBuffer.UVUPos = BO2VertexBuffer.UVUPos;
+        VertexBuffer.UVVPos = BO2VertexBuffer.UVVPos;
+        VertexBuffer.Normal = BO2VertexBuffer.Normal;
+        VertexBuffer.Tangent = BO2VertexBuffer.Tangent;
+
+        break;
+    }
+
+    return VertexBuffer;
+}
+
+std::vector<std::string> CoDXModelTranslator::SplitString(std::string String, char Splitter)
+{
+    std::vector<std::string> Strings;
+    std::istringstream F(String);
+    std::string S;
+    while (getline(F, S, Splitter)) {
+        Strings.push_back(S);
+    }
+
+    return Strings;
 }
 
 int32_t CoDXModelTranslator::CalculateBiggestLodIndex(const std::unique_ptr<XModel_t>& Model)

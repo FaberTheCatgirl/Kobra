@@ -473,6 +473,7 @@ void MainWindow::GetListViewInfo(LV_ITEM* ListItem, CWnd* Owner)
                 case WraithAssetType::RawFile: AssetTypeStr = L"Rawfile"; break;
                 case WraithAssetType::Effect: AssetTypeStr = L"Effect"; break;
                 case WraithAssetType::Material: AssetTypeStr = L"Material"; break;
+                case WraithAssetType::Map: AssetTypeStr = L"Map"; break;
                 }
 
                 // Set the type
@@ -538,6 +539,12 @@ void MainWindow::GetListViewInfo(LV_ITEM* ListItem, CWnd* Owner)
                 case WraithAssetType::Effect:
                     // Effects info
                     DetailsFmt.Format(L"Elements: %d", ((CoDEffect_t*)Asset)->ElementCount);
+                    break;
+                case WraithAssetType::Map:
+
+                    CoDMap_t* map = (CoDMap_t*)Asset;
+                    // Map info
+                    DetailsFmt.Format(L"XModels: %d, Surfaces: %d", map->ModelCount, map->SurfaceCount);
                     break;
                 }
 

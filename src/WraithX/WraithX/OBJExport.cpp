@@ -8,8 +8,11 @@
 #include "Strings.h"
 #include "FileSystems.h"
 
-void WavefrontOBJ::ExportOBJ(const WraithModel& Model, const std::string& FileName)
+void WavefrontOBJ::ExportOBJ(const WraithModel& Model, const std::string& FileName, bool CombineMtls)
 {
+    std::string MtlFileName = FileName.substr(0, FileName.size() - 4);
+    MtlFileName.erase(0, MtlFileName.find_last_of("\\") + 1);
+
     // Create a new writer
     auto Writer = TextWriter();
     // Open the model file
@@ -29,12 +32,12 @@ void WavefrontOBJ::ExportOBJ(const WraithModel& Model, const std::string& FileNa
         {
             // Write positions
             Writer.WriteLineFmt(
-                "v %f %f %f\n"
-                "v %f %f %f\n"
-                "v %f %f %f",
-                Submesh.Verticies[Face.Index1].Position.X, Submesh.Verticies[Face.Index1].Position.Y, Submesh.Verticies[Face.Index1].Position.Z,
-                Submesh.Verticies[Face.Index2].Position.X, Submesh.Verticies[Face.Index2].Position.Y, Submesh.Verticies[Face.Index2].Position.Z,
-                Submesh.Verticies[Face.Index3].Position.X, Submesh.Verticies[Face.Index3].Position.Y, Submesh.Verticies[Face.Index3].Position.Z
+                "v %f %f %f %f %f %f %f\n"
+                "v %f %f %f %f %f %f %f\n"
+                "v %f %f %f %f %f %f %f",
+                Submesh.Verticies[Face.Index1].Position.X, Submesh.Verticies[Face.Index1].Position.Y, Submesh.Verticies[Face.Index1].Position.Z, (float)Submesh.Verticies[Face.Index1].Color[0] / 255, (float)Submesh.Verticies[Face.Index1].Color[1] / 255, (float)Submesh.Verticies[Face.Index1].Color[2] / 255, (float)Submesh.Verticies[Face.Index1].Color[3] / 255,
+                Submesh.Verticies[Face.Index2].Position.X, Submesh.Verticies[Face.Index2].Position.Y, Submesh.Verticies[Face.Index2].Position.Z, (float)Submesh.Verticies[Face.Index2].Color[0] / 255, (float)Submesh.Verticies[Face.Index2].Color[1] / 255, (float)Submesh.Verticies[Face.Index2].Color[2] / 255, (float)Submesh.Verticies[Face.Index2].Color[3] / 255,
+                Submesh.Verticies[Face.Index3].Position.X, Submesh.Verticies[Face.Index3].Position.Y, Submesh.Verticies[Face.Index3].Position.Z, (float)Submesh.Verticies[Face.Index3].Color[0] / 255, (float)Submesh.Verticies[Face.Index3].Color[1] / 255, (float)Submesh.Verticies[Face.Index3].Color[2] / 255, (float)Submesh.Verticies[Face.Index3].Color[3] / 255
                 );
         }
     }
@@ -86,12 +89,11 @@ void WavefrontOBJ::ExportOBJ(const WraithModel& Model, const std::string& FileNa
             "mtllib %s.mtl\n"
             "g %s\n"
             "usemtl %s",
-            Material.MaterialName.c_str(),
+            CombineMtls ? MtlFileName.c_str() : Material.MaterialName.c_str(),
             Material.MaterialName.c_str(),
             Material.MaterialName.c_str()
-            );
-        // Add
-        UniqueMaterials.insert(Submesh.MaterialIndicies[0]);
+            );// Add
+            UniqueMaterials.insert(Submesh.MaterialIndicies[0]);
         // Iterate over faces
         for (auto& Face : Submesh.Faces)
         {
@@ -109,17 +111,33 @@ void WavefrontOBJ::ExportOBJ(const WraithModel& Model, const std::string& FileNa
     }
     // Prepare to make materials if need be
     auto MaterialPath = FileSystems::GetDirectoryName(FileName);
+
+    // Make a new writer
+    TextWriter MatWriter;
+
+    if (CombineMtls)
+    {
+        MatWriter = TextWriter();
+        // Make the material
+        MatWriter.Create(FileSystems::CombinePath(MaterialPath, MtlFileName + ".mtl"));
+    }
+
     // Iterate over unique group
     for (auto& MaterialIndex : UniqueMaterials)
     {
         // Grab a reference to material
         const WraithMaterial& Material = (MaterialIndex > -1) ? Model.Materials[MaterialIndex] : WraithMaterial::DefaultMaterial;
-        // Make a new writer
-        auto MatWriter = TextWriter();
-        // Make the material
-        MatWriter.Create(FileSystems::CombinePath(MaterialPath, Material.MaterialName + ".mtl"));
+
+        if (!CombineMtls)
+        {
+            // Make a new writer
+            MatWriter = TextWriter();
+            // Make the material
+            MatWriter.Create(FileSystems::CombinePath(MaterialPath, Material.MaterialName + ".mtl"));
+        }
+
         // Write header
-        MatWriter.WriteLineFmt("newmtl %s", Material.MaterialName.c_str());
+        MatWriter.WriteLineFmt("\nnewmtl %s", Material.MaterialName.c_str());
         // Basic info
         MatWriter.WriteLine("illum 4\nKd 0.00 0.00 0.00\nKa 0.00 0.00 0.00\nKs 0.50 0.50 0.50");
         // Output maps

@@ -261,6 +261,9 @@
     <ClCompile Include="CoDXModelMeshHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MapSettings.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoDAssets.h">
@@ -499,6 +502,9 @@
     </ClInclude>
     <ClInclude Include="CoDXModelMeshHelper.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MapSettings.h">
+      <Filter>Header Files\Dialogs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
