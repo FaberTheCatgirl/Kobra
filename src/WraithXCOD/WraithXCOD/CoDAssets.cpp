@@ -410,8 +410,61 @@ std::map<uint32_t, std::string> SemanticHashes =
     { 0x95B48AE5, "meltRevealMap" },
     { 0x1DCB003F, "meltNormalMap" },
     { 0xB607C0FE, "Color_Map" },
+
+    { 0x27568B1F, "decalColorMap1" },
+    { 0x27568B1C, "decalColorMap2" },
+
+    { 0x5A7D8971, "decalNormalMap1" },
+
+    { 0xCC382E3A, "decalSpecColorMap1" },
+    { 0xCC382E39, "decalSpecColorMap2" },
+
+    { 0xBAE31156, "decalAlphaMap1" },
+    { 0xBAE31155, "decalAlphaMap2" },
+
+    { 0xCD7DF742, "envBrdFlut" },
+    { 0x7D3CDFB3, "envBrdFlut1" },
+
+    { 0x48D1074B, "displacementMap" },
+    { 0x62F1F09A, "displacementMap1" },
+    { 0x62F1F099, "displacementMap2" },
+    { 0x62F1F098, "displacementMap3" },
+    { 0x62F1F09F, "displacementMap4" },
+    { 0x62F1F09E, "displacementMap5" },
+    { 0x62F1F09D, "displacementMap6" },
+    { 0x62F1F09C, "displacementMap7" },
+    { 0x62F1F093, "displacementMap8" },
+
+    { 0xB60D1850, "colorMap1" },
+    { 0xB60D1853, "colorMap2" },
+    { 0xB60D1852, "colorMap3" },
+
+    { 0x9434AEDE, "normalMap1" },
+
     { 0x34ECCCB3, "specularMap" },
-    { 0x6001F931, "occlusionMap" }
+    { 0xD2866322, "specularMap1" },
+
+    { 0x6001F931, "occlusionMap" },
+    { 0x60411F60, "occlusionMap1" },
+
+    { 0x7389AC64, "heatMap" },
+
+    { 0xCFE18444, "revealMap1" },
+
+    { 0x38436E1C, "uvDistortMap" },
+
+    { 0xFFC5A8BB, "worldXyzNoiseMap" },
+
+    { 0xF2C66201, "envMap" },
+
+    { 0x44C0B99F, "tangentMap" },
+
+    { 0x103B5996, "cloakMap" },
+
+    { 0x197CA29E, "eyeAOTex" },
+    { 0x26FE83DC, "eyeIrradianceTex" },
+
+    { 0x546D65C7, "parallaxMap" }
 };
 
 // -- Find game information
@@ -433,13 +486,14 @@ const std::vector<CoDGameProcess> CoDAssets::GameProcessInfo =
     { "t5mp.exe", SupportedGames::BlackOps, SupportedGameFlags::MP },
     { "plutonium-bootstrapper-win32.exe", SupportedGames::BlackOps, SupportedGameFlags::MP },
     // Black Ops 2
+    { "t6sp.exe", SupportedGames::BlackOps2, SupportedGameFlags::SP },
+    { "t6sp-mod-launcher.exe", SupportedGames::BlackOps2, SupportedGameFlags::SP },
     { "t6zm.exe", SupportedGames::BlackOps2, SupportedGameFlags::ZM },
     { "t6zmv41.exe", SupportedGames::BlackOps2, SupportedGameFlags::ZM },
     { "plutonium-bootstrapper-win32.exe", SupportedGames::BlackOps2, SupportedGameFlags::ZM },
     { "t6mp.exe", SupportedGames::BlackOps2, SupportedGameFlags::MP },
     { "t6mpv43.exe", SupportedGames::BlackOps2, SupportedGameFlags::MP },
     { "plutonium-bootstrapper-win32.exe", SupportedGames::BlackOps2, SupportedGameFlags::MP },
-    { "t6sp.exe", SupportedGames::BlackOps2, SupportedGameFlags::SP },
     // Black Ops 3
     { "BlackOps3.exe", SupportedGames::BlackOps3, SupportedGameFlags::SP },
     // Black Ops 4
@@ -470,9 +524,10 @@ const std::vector<CoDGameProcess> CoDAssets::GameProcessInfo =
     // Advanced Warfare
     { "s1_sp64_ship.exe", SupportedGames::AdvancedWarfare, SupportedGameFlags::SP },
     { "s1-mod.exe", SupportedGames::AdvancedWarfare, SupportedGameFlags::SP },
+    { "s1x.exe", SupportedGames::AdvancedWarfare, SupportedGameFlags::SP },
     { "s1_mp64_ship.exe", SupportedGames::AdvancedWarfare, SupportedGameFlags::MP },
     { "s1-mod.exe", SupportedGames::AdvancedWarfare, SupportedGameFlags::MP },
-    { "s1x.exe", SupportedGames::AdvancedWarfare, SupportedGameFlags::SP },
+    { "s1x.exe", SupportedGames::AdvancedWarfare, SupportedGameFlags::MP },
     // Modern Warfare Remastered
     { "h1_sp64_ship.exe", SupportedGames::ModernWarfareRemastered, SupportedGameFlags::SP },
     { "h1-mod.exe", SupportedGames::ModernWarfareRemastered, SupportedGameFlags::SP },
