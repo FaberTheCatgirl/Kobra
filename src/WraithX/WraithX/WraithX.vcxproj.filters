@@ -294,6 +294,12 @@
     <ClInclude Include="CastExport.h">
       <Filter>Header Files\Exporters</Filter>
     </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Rotation.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -523,6 +529,12 @@
     </ClCompile>
     <ClCompile Include="CastExport.cpp">
       <Filter>Source Files\Exporters</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Rotation.cpp">
+      <Filter>Source Files\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

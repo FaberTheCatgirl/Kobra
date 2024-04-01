@@ -636,7 +636,7 @@ void MainWindow::LoadGameAsync()
         GetDlgItem(IDC_SEARCHTEXT)->EnableWindow(false);
 
         // Notify the user about the issue
-        MessageBoxA(this->GetSafeHwnd(), "No instances of any supported game were found, or your game is running as Administrator. Please make sure the game is running first or run Kobra as Administrator.", "Kobra - Game Unsupported or Running as Admin", MB_OK | MB_ICONWARNING);
+        MessageBoxA(this->GetSafeHwnd(), "No instances of any supported game were found.\nYou may be running your game in Administrator mode.\nPlease make sure a supported game is running first or run Kobra as Administrator.", "Kobra - Game Unsupported or Running as Admin", MB_OK | MB_ICONWARNING);
     }
     else if (LoadGameResult == FindGameResult::FailedToLocateInfo)
     {
@@ -650,7 +650,7 @@ void MainWindow::LoadGameAsync()
         GetDlgItem(IDC_SEARCHTEXT)->EnableWindow(false);
 
         // Notify the user about the issue
-        MessageBoxA(this->GetSafeHwnd(), "This game is supported, but the current update is not. Or maybe you're running a mod. Please wait for an upcoming patch for support.", "Kobra", MB_OK | MB_ICONWARNING);
+        MessageBoxA(this->GetSafeHwnd(), "This game is supported, you may be running a MOD\nor the current update isn't supported.\nPlease wait for an upcoming patch for support.", "Kobra - MOD running or unsupported update", MB_OK | MB_ICONWARNING);
     }
 }
 

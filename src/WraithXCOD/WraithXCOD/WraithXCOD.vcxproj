@@ -146,6 +146,7 @@
     <ClCompile Include="IPAKSupport.cpp" />
     <ClCompile Include="IWDCache.cpp" />
     <ClCompile Include="IWDSupport.cpp" />
+    <ClCompile Include="IWMap.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="MapSettings.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="IPAKSupport.h" />
     <ClInclude Include="IWDCache.h" />
     <ClInclude Include="IWDSupport.h" />
+    <ClInclude Include="IWMap.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="MapSettings.h" />
     <ClInclude Include="ModelSettings.h" />

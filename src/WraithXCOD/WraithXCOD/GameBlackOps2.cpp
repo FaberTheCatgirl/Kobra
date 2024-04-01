@@ -2,6 +2,7 @@
 
 // The class we are implementing
 #include "GameBlackOps2.h"
+#include "IWMap.h"
 
 // We need the CoDAssets class
 #include "CoDAssets.h"

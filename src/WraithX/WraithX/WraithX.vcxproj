@@ -120,6 +120,7 @@
     <ClInclude Include="OBJExport.h" />
     <ClInclude Include="Patterns.h" />
     <ClInclude Include="ProcessReader.h" />
+    <ClInclude Include="Rotation.h" />
     <ClInclude Include="Salsa20.h" />
     <ClInclude Include="SEAnimExport.h" />
     <ClInclude Include="SEModelExport.h" />
@@ -136,6 +137,7 @@
     <ClInclude Include="tiny_gltf.h" />
     <ClInclude Include="ValveSMDExport.h" />
     <ClInclude Include="VectorMath.h" />
+    <ClInclude Include="Vector.h" />
     <ClInclude Include="WebClient.h" />
     <ClInclude Include="WraithAboutDialog.h" />
     <ClInclude Include="WraithAnim.h" />
@@ -201,6 +203,7 @@
     <ClCompile Include="OBJExport.cpp" />
     <ClCompile Include="Patterns.cpp" />
     <ClCompile Include="ProcessReader.cpp" />
+    <ClCompile Include="Rotation.cpp" />
     <ClCompile Include="Salsa20.cpp" />
     <ClCompile Include="SEAnimExport.cpp" />
     <ClCompile Include="SEModelExport.cpp" />
@@ -217,6 +220,7 @@
     <ClCompile Include="TextWriter.cpp" />
     <ClCompile Include="ValveSMDExport.cpp" />
     <ClCompile Include="VectorMath.cpp" />
+    <ClCompile Include="Vector.cpp" />
     <ClCompile Include="WebClient.cpp" />
     <ClCompile Include="WraithAboutDialog.cpp" />
     <ClCompile Include="WraithAnim.cpp" />

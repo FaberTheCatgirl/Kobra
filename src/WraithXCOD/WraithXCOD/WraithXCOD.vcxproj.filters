@@ -264,6 +264,9 @@
     <ClCompile Include="MapSettings.cpp">
       <Filter>Source Files\Dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="IWMap.cpp">
+      <Filter>Source Files\Packages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoDAssets.h">
@@ -505,6 +508,9 @@
     </ClInclude>
     <ClInclude Include="MapSettings.h">
       <Filter>Header Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="IWMap.h">
+      <Filter>Header Files\Packages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

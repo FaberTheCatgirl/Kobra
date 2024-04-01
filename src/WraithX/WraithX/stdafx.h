@@ -52,6 +52,7 @@
 #include <IPHlpApi.h>
 #include <locale>
 #include <codecvt>
+#include <cmath>
 
 // Remove several windows problems
 #undef max
